@@ -2,9 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const hb = require("express-handlebars");
 const basicAuth = require("express-basic-auth");
-const knexConfig = require('../knexfile.js').development;
-const knex = require('knex')(knexConfig);
-const AuthChallenger = require('./AuthChallenger.js');
+const knexConfig = require("../knexfile.js").development;
+const knex = require("knex")(knexConfig);
+const AuthChallenger = require("./AuthChallenger.js");
+const path = require('path');
 // the Auth function and users authentication information
 module.exports = () => {
   let app = express();
@@ -13,8 +14,9 @@ module.exports = () => {
   app.set("view engine", "handlebars");
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
-  app.use(express.static("public"));
+  app.use("/public", express.static(path.join(__dirname, "public")));
   //handle multiple users using the authentication information the users input
+  /*
   app.use(
     basicAuth({
       authorizer: new AuthChallenger(knex),//knex
@@ -23,5 +25,6 @@ module.exports = () => {
       realm: "Food Recipe Finder Project"
     })
   );
+  */
   return app;
 };
