@@ -31,39 +31,7 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-/* app.get("/random", (req, res) => {
-  axios
-    .get(
-      "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?number=2",
-      {
-        headers: {
-          "X-Mashape-Key": "C64uSjkfeCmshNu4jJSBQXddDqXcp1BAXMVjsnuLQ2BPchpPJn",
-          "X-Mashape-Host": "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-        }
-      }
-    )
-    .then(response => {
-      console.log(response.data);
-      res.send({
-        data: response.data.recipes
-      });
-    })
-    .catch(err => {
-      res.send("Error:", err);
-    });
-}); */
-/* unirest
-  .get(
-    "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=2&tags=vegetarian%2Cdessert"
-  )
-  .header(
-    "X-RapidAPI-Key",
-    "C64uSjkfeCmshNu4jJSBQXddDqXcp1BAXMVjsnuLQ2BPchpPJn"
-  )
-  .end(function(result) {
-    console.log(result.body.recipes);
-  });
- */
+
 app.listen(port, () => {
   console.log("Server running on port: ", port);
 });
