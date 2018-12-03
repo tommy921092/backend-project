@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("measures", table => {
     table.increments();
-    table.string("name").unique();
+    table.string("measure_name").unique();
   });
 };
 

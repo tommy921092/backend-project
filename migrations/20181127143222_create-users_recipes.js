@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.foreign("user_id").references("users.id");
     table.integer("recipe_id");
     table.foreign("recipe_id").references("recipes.id");
+    table.integer("rating");
   });
 };
 
