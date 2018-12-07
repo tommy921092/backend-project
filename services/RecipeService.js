@@ -2,29 +2,7 @@ class RecipeService {
   constructor(knex) {
     this.knex = knex;
   }
-
-  async listBySearch(keyword) {
-    //NEED FIX-------search if the keyword exist in any field of the row, if yes then list it
-    try {
-      let query = await this.knex("recipes")
-        .select(
-          "recipes.id",
-          "recipes.name",
-          "recipes.description",
-          "users.username",
-          "recipes.time_taken",
-          "tags.name"
-        )
-        .innerJoin("users", "recipes.user_id", "users.id");
-      //NEED FIX-------.where to_tsvector('english', body) @@ to_tsquery('english', 'friend');
-      return query;
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async listAllTag(tag) {
-    //NEED FIX-------tested but only work for one tag, trying to querystring multiple tags=>object input this function
+  async listByName(keyword) {
     try {
       let query = await this.knex("recipes")
         .select(
@@ -32,13 +10,37 @@ class RecipeService {
           "recipes.recipe_name",
           "recipes.description",
           "users.username",
+          "recipes.time_taken"
+        )
+        .innerJoin("users", "recipes.user_id", "users.id")
+        .where("recipes.recipe_name", "like", keyword);
+      console.log(query);
+      return query;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async listByTags(tags) {
+    //tested
+    try {
+      let Arr = tags.split(",");
+      console.log(Arr);
+      let query = await this.knex("recipes")
+        .select(
+          "recipes.id as recipeID",
+          "recipes.recipe_name",
+          "recipes.description",
+          "users.username",
           "recipes.time_taken",
-          "tags.tagname"
+          this.knex.raw("ARRAY_AGG(tags.tagname) as tags")
         )
         .innerJoin("users", "recipes.user_id", "users.id")
         .innerJoin("recipes_tags", "recipes_tags.recipe_id", "recipes.id")
         .innerJoin("tags", "recipes_tags.tag_id", "tags.id")
-        .where("tags.tagname", tag);
+        .whereIn("tags.tagname", Arr)
+        .groupBy("recipes.id", "users.username"); //{...tags: ['dessert','vegan']}
+      console.log(query);
+      return query;
     } catch (e) {
       console.log(e);
     }
@@ -48,6 +50,7 @@ class RecipeService {
     //tested
     try {
       let query = await this.knex("recipes").where("recipes.id", recipeID);
+      console.log(query);
       return query;
     } catch (e) {
       console.log(e);
@@ -72,7 +75,7 @@ class RecipeService {
     }
   }
 
-  async Rate(recipeID, user, rating) {
+  async rate(recipeID, user, rating) {
     //tested
     try {
       let query = await this.knex("users")
@@ -112,4 +115,65 @@ class RecipeService {
       console.log(e);
     }
   }
+
+  async addRecipe(user, content) {
+    try {
+      let query = await this.knex("users")
+        .select("id")
+        .where("users.username", user)
+        .first();
+      await this.knex("recipes")
+        .insert({
+          recipe_name: content.name,
+          user_id: query.id,
+          imageurl: content.url,
+          description: content.description,
+          instructions: content.instructions,
+          time_taken: content.time_taken,
+          rating: content.rating,
+          imakeit: content.imakeit
+        })
+        .where("recipes.user_id", query.id);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async listComment(recipeID) {
+    //tested
+    try {
+      let query = await this.knex("comments")
+        .select("users.id", "users.username", "comments.content")
+        .innerJoin("recipes", "comments.recipe_id", "recipes.id")
+        .innerJoin("users", "comments.user_id", "users.id")
+        .where("recipes.id", recipeID);
+      console.log(query);
+      return query;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async addComment(recipeID, user, content) {
+    //tested
+    try {
+      let query = await this.knex("users")
+        .select("id")
+        .where("users.username", user)
+        .first();
+      return await this.knex
+        .insert({
+          content: content,
+          recipe_id: recipeID,
+          user_id: query.id
+        })
+        .into("comments");
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async iMakeIt() {}
 }
+
+module.exports = RecipeService;

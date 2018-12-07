@@ -4,11 +4,11 @@ exports.up = function(knex, Promise) {
     table.string("recipe_name");
     table.integer("user_id");
     table.foreign("user_id").references("users.id");
-    table.string("image");
+    table.string("imageurl");
     table.string("description");
     table.string("instructions");
     table.integer("time_taken");
-    table.integer("rating");
+    table.decimal("rating");
     table.integer("imakeit");
     table.timestamps(false, true);
   });

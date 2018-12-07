@@ -1,50 +1,54 @@
 const express = require("express");
-
 class RecipeRouter {
   constructor(recipeService) {
     this.recipeService = recipeService;
   }
-
   router() {
-    let router = express.Router();
-    router.get("/", this.get.bind(this));
-    router.post("/", this.post.bind(this));
-    router.put("/:id", this.put.bind(this));
-    router.patch("/:id", this.put.bind(this));
-    router.delete("/:id", this.delete.bind(this));
+    const router = express.Router();
+    //get recipe details
+    router.get("/recipe", (req, res) => {
+      this.recipeService.showDetails(req.query.q);
+      this.recipeService.listComment(req.query.q);
+    });
+    //search by name
+    router.get("/search", (req, res) => {
+      if (req.query.name) {
+        this.recipeService.listByName(req.query.name);
+      }
+      if (req.query.tags) {
+        this.recipeService.listByTags(req.query.tags);
+      }
+    });
+    //get saved recipes
+    router.get("/save", (req, res) => {
+      return this.recipeService.listBySave(req.auth.user);
+    });
+    //add recipe
+    router.post("/addRecipe", (req, res) => {
+      this.recipeService.addRecipe(req.auth.user, req.body.content);
+    });
+    //add comment
+    router.post("/addComment", (req, res) => {
+      return this.recipeService
+        .addComment(req.query.name, req.body.comment, req.auth.user)
+        .then(() => {
+          this.recipeService.listComment(req.query.q);
+        });
+    });
+    //rate recipe
+    router.post("/rate", (req, res) => {
+      return this.recipeService.rate(req.body.rate);
+    });
+
+    router.post("/save", (req, res) => {
+      return this.recipeService.save(req.query.q, req.auth.user);
+    });
+
+    router.post('/imakeit',(req,res)=>{
+      // return this.recipeService.
+    })
+
     return router;
-  }
-
-  get(req, res) {
-    //Validation Logic
-    return this.recipeService
-      .list()
-      .then(data => res.json(data))
-      .catch(err => res.status(500).json(err));
-  }
-
-  post(req, res) {
-    //Validation Logic
-    return this.recipeService
-      .create(req.body)
-      .then(data => res.json(data))
-      .catch(err => res.status(500).json(err));
-  }
-
-  put(req, res) {
-    //Validation Logic
-    return this.recipeService
-      .update(req.params.id, req.body)
-      .then(data => res.json(data))
-      .catch(err => res.status(500).json(err));
-  }
-
-  delete(req, res) {
-    //Validation Logic
-    return this.recipeService
-      .delete(req.params.id)
-      .then(data => res.json(data))
-      .catch(err => res.status(500).json(err));
   }
 }
 
