@@ -1,0 +1,31 @@
+{
+  "name": "38-passport",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "connect-redis": "^3.4.0",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "knex": "^0.15.2",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth20": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.6.1",
+    "redis": "^2.8.0",
+    "require-dir": "^1.2.0",
+    "socket.io": "^2.2.0",
+    "socket.io.session": "^1.0.13"
+  }
+}
