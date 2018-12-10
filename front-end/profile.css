@@ -49,6 +49,11 @@
     border:0;
 }
 
+#information input[type="submit"]:hover{
+    color:#3399ff;
+    transition: 0.8s;
+}
+
 #horizonline{
     text-align: center;
     width: 100%;
@@ -70,7 +75,7 @@
     font-size: 10px;
 }
 
-input[type="submit"]:hover{
+#upload input[type="submit"]:hover{
     background-color:black;
     color:white;
     transition: 0.8s;
@@ -88,4 +93,57 @@ input[type="submit"]:hover{
     height: auto;
     /* display: flex;
     justify-content: flex-start; */
+}
+
+#searchresult{
+    display: flex;
+    justify-content: center;
+    height: auto;
+}
+
+#searchbody{
+    height: auto;
+    width: 100%;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.card{
+    height: 100%;
+
+}
+
+.row{
+    padding: 0px 20px;
+}
+
+@media only screen and (max-width: 768px){
+    .row{
+        padding: 0px 0px;
+    }
+}
+
+.everycard{
+    width: 25%;
+    margin-bottom: 20px;
+}
+
+.card-body{
+    padding:0;
+}
+
+
+.card-body h6{
+    margin-bottom: 3px;
+}
+
+.card-body p{
+    font-size: 10px;
+}
+
+.list-group-item{
+    padding:10px 0px;
+    border: 0;
+    font-size: 10px;
 }
