@@ -1,24 +1,203 @@
+<!DOCTYPE html>
+<html>
+
 <head>
-    <link href="./css/styles.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>MadaFood_login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/css/app.css">
+    <link rel="stylesheet" href="./assets/css/login.css">
 </head>
-<body>
-    <form action="/login" method="post">
-        <div>
-            <label>email:</label>
-            <input type="text" name="username" />
+
+<body id="body" style="background-color: #ffffff;">
+    <!-- making the navbar -->
+    <section id="header">
+        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #ffff00;">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            </div>
+            <div class="mx-auto order-0">
+                <a class="navbar-brand mx-auto title" href="#">MadaFood</a>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+    <section id="accessing" class="row">
+        <div id="login" class="col-md-4 col-sm-12 col-12">
+            <h4>LOGIN</h4>
+            <div id="line"></div>
+            <div id="line"></div>
+            <!-- modify later -->
+
+            <!-- <form action="/sth" method="POST">
+                <div id="container">
+                    <p>User Name</p>
+                    <input type="text" name="username" value="">
+                </div>
+                <div id="container">
+                    <p>Password</p>
+                    <input type="text" name="password" value="">
+                </div>
+                <input type="submit" value="Submit">
+            </form> -->
+            <form action="/login" method="post">
+                <div id="container">
+                    <label>Username:</label>
+                    <input type="email" name="username" required>
+                </div>
+                <div id="container">
+                    <label>Password:</label>
+                    <input type="password" name="password" required>
+                </div>
+                <div>
+                    <input type="submit" value="Log In">
+                </div>
+                <div id="container">
+                    <!-- facebook login option -->
+                    <a class="fa fa-facebook" href='/auth/facebook'></a>
+                    <!-- google login option -->
+                    <a class="fa fa-google" href='/auth/google'></a>
+                </div>
+            </form>
+
+            <div id="horizonline"></div>
         </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" name="password" />
+
+        <div id="middleline">
         </div>
-        <div>
-            <input type="submit" value="Log In" />
+
+        <div id="signup" class="col-md-4 col-sm-12 col-12">
+            <h4>SIGN UP</h4>
+
+            <div id="line"></div>
+            <div id="line"></div>
+            <div id="signupblock">
+                <div>
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-google"></a>
+                    <a href="#" class="fa fa-github"></a>
+                </div>
+                <div id="line"></div>
+                <p>OR</p>
+
+                <a href="./signup.html"><input type="submit" value="Sign Up"></a>
+
+                <!-- Modal signup form -->
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Sign Up
+                </button>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document" id="modal-dialog">
+                        <div class="modal-content" id="modal">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Sigh Up Form</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form action="/sth" method="POST">
+                                    <div id="container">
+                                        <label>Email:</label>
+                                        <input type="email" name="username" required>
+                                    </div>
+                                    <div id="container">
+                                        <label>Username:</label>
+                                        <input type="text" name="user">
+                                    </div>
+                                    <div id="container">
+                                        <label>Password:</label>
+                                        <input type="password" name="password" required>
+                                    </div>
+
+                                    requires validation
+                                    <div id="container">
+                                        <label>Password Confirm:</label>
+                                        <input type="#" name="#" value="">
+                                    </div>
+
+                                    <input type="submit" value="Submit">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ -->
+            </div>
+    </section>
+
+
+    <!-- footer , term will be change later-->
+    <footer class="footer-bs">
+        <div class="row">
+
+            <div class="col-md-3 footer-brand animated fadeInLeft">
+                <h2>MadaFood</h2>
+                <p>Basic introduction of the page, it will be extended later. and now just trying to make the words in
+                    a length.</p>
+                <p>© 2018 Accelerate Group Project</p>
+            </div>
+
+            <div class="col-md-4 footer-nav animated fadeInUp">
+                <h4>Menu —</h4>
+                <div class="col-md-6">
+                    <ul class="list">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contacts</a></li>
+                        <li><a href="#">Terms & Condition</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-2 footer-social animated fadeInDown">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">RSS</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 footer-ns animated fadeInRight">
+                <h4>Newsletter</h4>
+                <p>Somthing will be added into here later </p>
+                <p>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-envelope"></span></button>
+                        </span>
+                    </div><!-- /input-group -->
+                </p>
+            </div>
+
         </div>
-        <div class="container">
-            <!-- facebook login option -->
-            <a href='/auth/facebook'><img src='./icons/btn_facebook_signin_web.png'></a>
-            <!-- google login option -->
-            <a href='/auth/google'><img src='./icons/btn_google_signin_light_focus_web.png'></a>
-        </div>
-    </form>
+    </footer>
+
 </body>
+<!-- <script src="app.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+</html>

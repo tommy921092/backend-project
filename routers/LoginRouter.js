@@ -1,3 +1,4 @@
+const path = require('path');
 //router.js
 const passport = require('passport');
 
@@ -18,7 +19,7 @@ module.exports = (express) => {
 
   // login
   router.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/login.html');
+    res.sendFile(path.join(__dirname, '../public', 'login.html'));
   });
 
   router.post('/login', passport.authenticate('local-login', {
@@ -29,7 +30,7 @@ module.exports = (express) => {
   // facebook routes
   router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: '/'
-  }), (req, res) => res.redirect('/'));
+  }), (req, res) => res.redirect('/')); // /profile refers to get request from UserRouter.js
 
   router.get('/auth/facebook', passport.authenticate('facebook', {
     scope: ['public_profile', 'email']
@@ -49,7 +50,7 @@ module.exports = (express) => {
 
   // sign-up
   router.get('/signup', (req, res) => {
-    res.sendFile(__dirname + '/signup.html');
+    res.sendFile(path.join(__dirname, '../public', '/signup.html'));
   });
 
   router.post('/signup', passport.authenticate('local-signup', {
@@ -62,8 +63,13 @@ module.exports = (express) => {
   });
 
   router.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(path.join(__dirname, '../public', '/index.html'));
   });
+
+  // profile page redirect
+  // router.get('/profile', (req, res) => {
+  //   res.sendFile(path.join(__dirname, '../public', '/profile.html'));
+  // });
 
   // auth logout
   router.get('/logout', (req, res) => {

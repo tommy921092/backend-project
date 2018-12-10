@@ -62,13 +62,13 @@ input[type="submit"]:hover{
     transition: 0.8s;
 }
 
-input[type="text"]{
+/* input[type="text"]{
     width: 90%;
     height:100%;
     border: 1px solid;
     border-radius: 5px;
     margin-left:10px;
-}
+} */
 
 #container{
     margin-top: 10px;
