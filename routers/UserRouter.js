@@ -1,4 +1,6 @@
 const express = require("express");
+const path = require('path');
+
 class UserRouter {
   constructor(UserService) {
     this.UserService = UserService;
@@ -7,8 +9,13 @@ class UserRouter {
     const router = express.Router();
 
     router.get("/profile", (req, res) => {
-      console.log(this.UserService.getProfile(req.user.username));
-      return this.UserService.getProfile(req.user.username);
+      
+      this.UserService.getProfile(req.user.username).then(function(result) {
+        console.log('user details:', result)
+      });
+
+      res.sendFile(path.join(__dirname, '../public', '/profile.html'));
+
     });
 
     router.post("/changePW", (req, res) => {

@@ -30,7 +30,7 @@ module.exports = (express) => {
   // facebook routes
   router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: '/'
-  }), (req, res) => res.redirect('/')); // /profile refers to get request from UserRouter.js
+  }), (req, res) => res.redirect('/profile')); // /profile refers to get request from UserRouter.js
 
   router.get('/auth/facebook', passport.authenticate('facebook', {
     scope: ['public_profile', 'email']
@@ -66,7 +66,7 @@ module.exports = (express) => {
     res.sendFile(path.join(__dirname, '../public', '/index.html'));
   });
 
-  // profile page redirect
+  // profile page redirect --> moved to UserRouter
   // router.get('/profile', (req, res) => {
   //   res.sendFile(path.join(__dirname, '../public', '/profile.html'));
   // });
