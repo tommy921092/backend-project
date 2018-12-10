@@ -1,35 +1,50 @@
 const app = require("./utils/init-app")(); //initialize the app
-const axios = require("axios");
-
 const knexFile = require("./knexfile").development;
 const knex = require("knex")(knexFile);
+const port = 3000 || process.env.PORT;
+const express = require('express');
+const https = require('https');
 // const RecipeService = require("");
 
-const fs = require("fs");
-const https = require("https");
 const isLoggedIn = require("./utils/guard").isLoggedIn;
 
 const hb = require("express-handlebars");
-const port = 3000 || process.env.PORT;
+const fs = require("fs");
+const session = require("express-session");
+const setupPassport = require("./passport");
 
+const options = {
+  cert: fs.readFileSync("./localhost.crt"),
+  key: fs.readFileSync("./localhost.key")
+};
+
+const imageRouter = require('./public/imageRouter');
+const LoginRouter = require("./public/LoginRouter")(express);
+const { RecipeRouter, RecipeAPIRouter } = require("./routers");
+const { RecipeService, RecipeAPIService } = require("./services");
 const ViewRouter = require("./ViewRouter");
 
-const { RecipeRouter } = require("./routers");
+const recipeService = new RecipeService(knex);
+const recipeAPIService = new RecipeAPIService(knex);
 
-const { RecipeService, CommentService } = require("./services");
-const unirest = require("unirest");
-const queryString = require("query-string");
-// const app = require('./utils/init-app')();
-// app.use('/',new ViewRouter().router());
-// let recipeService = new RecipeService(knex);
-// let commentService = new CommentService(knex);
+app.use(
+  session({
+    secret: "supersecret",
+    // what do these do? - receive deprecated undefined message without
+    resave: true,
+    saveUninitialized: true
+  })
+);
+setupPassport(app);
+
+app.use('/',imageRouter);
+app.use("/", LoginRouter);
+//should add isLoggedIn to ensure services only are accessible to users
+app.use("/", new RecipeAPIRouter(recipeAPIService).router());
+app.use("/", new RecipeRouter(recipeService).router());
 // app.use("/api/recipes",isLoggedIn, new RecipeRouter(recipeService).router());
-app.engine("handlebars", hb({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
-app.listen(port, () => {
-  console.log("Server running on port: ", port);
-});
+https.createServer(options, app).listen(port);
+console.log("listening on port ", port);
 /*
   var i = req.url.indexOf('?');
   var query = req.url.substr(i+1);

@@ -8,6 +8,7 @@ class RecipeService {
         .select(
           "recipes.id",
           "recipes.recipe_name",
+          "recipes.imageurl",
           "recipes.description",
           "users.username",
           "recipes.time_taken"
@@ -29,6 +30,7 @@ class RecipeService {
         .select(
           "recipes.id as recipeID",
           "recipes.recipe_name",
+          "recipes.imageurl",
           "recipes.description",
           "users.username",
           "recipes.time_taken",
@@ -116,7 +118,7 @@ class RecipeService {
     }
   }
 
-  async addRecipe(user, content) {
+  async addRecipe(user, content, imageurl) {
     try {
       let query = await this.knex("users")
         .select("id")
@@ -126,7 +128,7 @@ class RecipeService {
         .insert({
           recipe_name: content.name,
           user_id: query.id,
-          imageurl: content.url,
+          imageurl: imageurl,
           description: content.description,
           instructions: content.instructions,
           time_taken: content.time_taken,
@@ -173,7 +175,8 @@ class RecipeService {
     }
   }
 
-  async iMakeIt() {}
+  async iMakeIt(recipeID, user) {}
+
 }
 
 module.exports = RecipeService;

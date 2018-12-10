@@ -66,36 +66,38 @@ class RecipeAPIService {
     unirest
       .get(url)
       .header("X-RapidAPI-Key", process.env.FOODAPI_KEY)
-      .end(function(result) {
-        console.log(result.body);
-        //trying to save the fucking recipe to DB..................
-        let query = await this.knex('recipes').where('recipe_name',result.body.title)
-        if(!query){
-          await this.knex('recipes').insert({
+      .end(async result => {
+        let query = await this.knex("recipes").where(
+          "recipe_name",
+          result.body.title
+        );
+        if (query=='') {
+          console.log('test1');
+          await this.knex("recipes").insert({
             recipe_name: result.body.title,
             imageurl: result.body.image,
             instructions: result.body.instructions,
             time_taken: result.body.readyInMinutes
-          })
+          });
 
-          let query2 = await this.knex('recipes').where('recipe_name',result.body.title).returning('id');
-          result.body.extendedIngredients.forEach(ele=>{
-            if(!(await this.knex('ingredients').where('name',ele.name))){//if the ingredient not exist in the table
-              await this.knex('ingredients').insert('name',ele.name) 
+          let query2 = await this.knex("recipes")
+            .where("recipe_name", result.body.title)
+            .returning("id");
+          result.body.extendedIngredients.forEach(async ele => {
+            let query3 = await this.knex('ingredients').where('name',ele.name);
+            if (query3=='') {
+              //if the ingredient not exist in the table
+              await this.knex("ingredients").insert("name", ele.name);
               //have to also update the recipeIngredients table
-              await this.knex('ingredients').insert({
-
-              })
+              // await this.knex("ingredients").insert({});
             }
-          })
+          });
         }
         return result.body;
       });
   }
 
-  save(recipeID,user) {
-
-  }
+  save(recipeID, user) {}
 }
 
 module.exports = RecipeAPIService;

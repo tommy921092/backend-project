@@ -11,10 +11,8 @@ class RecipeAPIRouter {
       const excludeIngredients = req.query.excludeIngredients;
       if (ingredient) {
         return this.recipeAPIService.findByIngredients(ingredient); //ingredients=apple%2Csugar%2Conion
-      } else if (name & ingredient) {
-        return this.recipeAPIService.findRecipeByName(name, excludeIngredients);
-        //????
       } else if (name) {
+        return this.recipeAPIService.findByName(name);
       } else {
         return this.recipeAPIService.findRandomRecipe();
       }

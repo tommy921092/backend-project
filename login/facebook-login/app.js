@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const router = require('./router')(express);
 const https = require('https');
 const fs = require('fs');
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 const options = {
     cert: fs.readFileSync('./localhost.crt'),
@@ -30,7 +30,7 @@ setupPassport(app);
 app.use('/', router);
 
 // we now want to implement https certificates
-// app.listen(port);
-https.createServer(options, app).listen(port);
+app.listen(port);
+
 
 console.log('listening on port ', port);

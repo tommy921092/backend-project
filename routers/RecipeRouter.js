@@ -1,4 +1,6 @@
 const express = require("express");
+const upload = require("../multer");
+const singleUpload = upload.single("image");
 class RecipeRouter {
   constructor(recipeService) {
     this.recipeService = recipeService;
@@ -25,7 +27,22 @@ class RecipeRouter {
     });
     //add recipe
     router.post("/addRecipe", (req, res) => {
-      this.recipeService.addRecipe(req.auth.user, req.body.content);
+      singleUpload(req, res, function(err, some) {
+        if (err) {
+          console.log(err);
+          return res.status(err.statusCode).send({
+            errors: [{ title: "Image Upload Error", detail: err.message }]
+          });
+        }
+
+        // insert the req.file.location to our knex table
+        console.log(req.file.location);
+        this.recipeService.addRecipe(
+          req.auth.user,
+          req.body.content,
+          req.file.location
+        );
+      });
     });
     //add comment
     router.post("/addComment", (req, res) => {
@@ -44,9 +61,9 @@ class RecipeRouter {
       return this.recipeService.save(req.query.q, req.auth.user);
     });
 
-    router.post('/imakeit',(req,res)=>{
+    router.post("/imakeit", (req, res) => {
       // return this.recipeService.
-    })
+    });
 
     return router;
   }

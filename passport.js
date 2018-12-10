@@ -4,14 +4,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy; // setup facebook strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy // setup google strategy
 const bcrypt = require('./bcrypt');
-const knex = require('knex')({
-  client: 'postgresql',
-  connection: {
-    database: "recipefinder",
-    user: "tommytks",
-    password: ""
-  }
-});
+const knexFile = require("./knexfile").development;
+const knex = require("knex")(knexFile);
 require('dotenv').config();
 
 module.exports = (app) => {
@@ -90,7 +84,7 @@ module.exports = (app) => {
     if (userResult.length == 0) {
       let user = {
         googleid: profile.id,
-        email: profile.displayName,
+        email: profile.emails[0].value,
         accesstoken: accessToken
       }
       let query = await knex('users').insert(user).returning('id');

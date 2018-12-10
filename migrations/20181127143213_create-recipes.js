@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.foreign("user_id").references("users.id");
     table.string("imageurl");
     table.string("description");
-    table.string("instructions");
+    table.string("instructions",1000);
     table.integer("time_taken");
     table.decimal("rating");
     table.integer("imakeit");
