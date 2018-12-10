@@ -1,0 +1,122 @@
+#inline-block{
+    display:flex;
+    justify-content: flex-start;
+}
+
+#verticalcenter{
+    display:flex;
+    align-items: center;
+}
+
+
+#btn{
+    background-color:white;
+    border:0;
+}
+
+#uploadform{
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    background-color:#3399ff;
+}
+
+#background{
+    width:90%;
+    background-color: white;
+    padding: 60px 40px;
+    margin: 40px;
+    border-radius: 30px;
+}
+
+#title{
+    display:flex;
+    justify-content: center;
+}
+
+#title input[type="text"]{
+    border: 2px dashed #333333;
+    border-radius: 2px;
+    width: 50%; 
+    height: 30px;
+    text-align: center;
+    color: #bfbfbf;
+}
+
+#adjustment{
+    padding: 0px 50px;
+}
+
+#photoupload{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0px;
+    border: 1px solid;
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+#imgupload{
+    width: 50%;
+    height: 200px;
+}
+
+#imgupload p{
+    margin-top: 50px;
+}
+
+#imgshow{
+    width: 250px;
+    height: 190px;
+    border: 1px solid;
+}
+
+#description p,#ingredient p, #direction p, #time p, #type p{
+    margin-bottom: 0px;
+}
+
+#description, #ingredient, #direction, #time, #type  {
+    margin-bottom: 20px;
+}
+
+#quantity{
+    display:flex;
+    align-items: center;
+    margin:5px;
+
+}
+
+#quantity select{
+    margin-left: 10px;
+}
+
+#time span{
+    margin-left: 10px;
+}
+
+input[type="checkbox"]{
+    margin-left: 10px;
+}
+
+input[type="submit"]{
+    display: block;
+    height:100%;
+    margin: 20px;
+    border: 1px solid;
+    background: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 20px;
+}
+
+input[type="submit"]:hover{
+    background-color:black;
+    color:white;
+    transition: 0.8s;
+}
+
