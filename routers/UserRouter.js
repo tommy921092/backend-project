@@ -7,11 +7,14 @@ class UserRouter {
     const router = express.Router();
 
     router.get("/profile", (req, res) => {
-      return this.UserService.getProfile(req.auth.user);
+      return this.UserService.getProfile(req.user.username);
     });
 
     router.post("/changePW", (req, res) => {
-      return this.UserService.changePW(req.auth.user, req.body.password);
+      return this.UserService.changePW(req.user.username, req.body.password);
+    });
+    router.post("/changeUsername", (req, res) => {
+      return this.UserService.changeusername(req.user.email,req.body.username);
     });
   }
 }

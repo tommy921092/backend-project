@@ -18,7 +18,6 @@ const options = {
   key: fs.readFileSync("./localhost.key")
 };
 
-const imageRouter = require('./public/imageRouter');
 const LoginRouter = require("./public/LoginRouter")(express);
 const { RecipeRouter, RecipeAPIRouter } = require("./routers");
 const { RecipeService, RecipeAPIService } = require("./services");
@@ -37,7 +36,6 @@ app.use(
 );
 setupPassport(app);
 
-app.use('/',imageRouter);
 app.use("/", LoginRouter);
 //should add isLoggedIn to ensure services only are accessible to users
 app.use("/", new RecipeAPIRouter(recipeAPIService).router());

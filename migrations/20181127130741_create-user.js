@@ -5,9 +5,10 @@ exports.up = function(knex, Promise) {
     table.string("DisplayName");
     table.string("password");
     table.string("email").unique();
-    table.integer("facebookid",100);
-    table.integer("googleid",100);
-    table.string("accesstoken");
+    table.string("facebookid",255);
+    table.string("googleid",255);
+    table.string("accesstoken",255);
+    table.string('profilepicture',255)
     table.boolean("active");
     table.timestamps(false, true);
   });
