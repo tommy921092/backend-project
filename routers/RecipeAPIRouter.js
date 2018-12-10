@@ -12,7 +12,7 @@ class RecipeAPIRouter {
       if (ingredient) {
         return this.recipeAPIService.findByIngredients(ingredient); //ingredients=apple%2Csugar%2Conion
       } else if (name) {
-        return this.recipeAPIService.findByName(name);
+        return this.recipeAPIService.findRecipeByName(name);
       } else {
         return this.recipeAPIService.findRandomRecipe();
       }

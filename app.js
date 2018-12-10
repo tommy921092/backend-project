@@ -34,9 +34,9 @@ app.use(
     saveUninitialized: true
   })
 );
-setupPassport(app);
+// setupPassport(app);
 
-app.use("/", LoginRouter);
+// app.use("/", LoginRouter);
 //should add isLoggedIn to ensure services only are accessible to users
 app.use("/", new RecipeAPIRouter(recipeAPIService).router());
 app.use("/", new RecipeRouter(recipeService).router());
