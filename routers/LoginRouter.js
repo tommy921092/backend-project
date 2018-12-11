@@ -17,20 +17,23 @@ module.exports = (express) => {
     res.send('Here you go, a secret');
   });
 
-  // login
+  // local login
   router.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '../public', 'login.html'));
   });
 
   router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
+    successRedirect: '/profile',
     failureRedirect: '/error'
   }));
 
   // facebook routes
   router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: '/'
-  }), (req, res) => res.redirect('/profile')); // /profile refers to get request from UserRouter.js
+  }), (req, res) => {
+    console.log('successfully reached callback URI');
+    res.redirect('/profile')
+  }); // /profile refers to get request from UserRouter.js
 
   router.get('/auth/facebook', passport.authenticate('facebook', {
     scope: ['public_profile', 'email']
@@ -41,7 +44,7 @@ module.exports = (express) => {
     failureRedirect: '/'
   }), (req,res) => {
     console.log('successfully reached callback URI');
-    res.redirect('/');
+    res.redirect('/profile');
   });
 
   router.get('/auth/google', passport.authenticate('google', {
@@ -67,9 +70,6 @@ module.exports = (express) => {
   });
 
   // profile page redirect --> moved to UserRouter
-  // router.get('/profile', (req, res) => {
-  //   res.sendFile(path.join(__dirname, '../public', '/profile.html'));
-  // });
 
   // auth logout
   router.get('/logout', (req, res) => {

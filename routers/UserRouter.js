@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require('path');
 
 class UserRouter {
   constructor(UserService) {
@@ -10,11 +9,16 @@ class UserRouter {
 
     router.get("/profile", (req, res) => {
       
-      this.UserService.getProfile(req.user.username).then(function(result) {
+      this.UserService.getProfile(req.user.id).then(function(result) {
         console.log('user details:', result)
+        res.render(('profile'), { 
+        name: result[0].username,
+        email: result[0].email,
+        profilepic: result[0].profilepicture
+        })
       });
 
-      res.sendFile(path.join(__dirname, '../public', '/profile.html'));
+      // res.sendFile(path.join(__dirname, '../public', '/profile.html'));
 
     });
 

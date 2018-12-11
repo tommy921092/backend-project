@@ -24,7 +24,7 @@ class UserService {
 
   async getProfile(user) {
     try {
-      return await this.knex("users").where("username", user);
+      return await this.knex("users").where("id", user);
     } catch (e) {
       console.log(e);
     }
