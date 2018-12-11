@@ -1,0 +1,119 @@
+<link rel="stylesheet" href="/css/upload.css" />
+
+<section id="uploadform">
+    <div id="background">
+        <form action="/sth" method="POST">
+
+            <div id="title">
+                <input type="text" name="title" value="Food Title">
+            </div>
+
+            <div id="adjustment">
+                <div id="photoupload" class="row">
+                    <div id="imgupload" class="col-md-6">
+                        <p>Photo Upload:</p>
+                        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                    </div>
+
+                    <div class="col-md-6">
+                        <div id="imgshow">
+                            <p>test</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="description">
+                <p>Description:</p>
+                <textarea name="message"></textarea>
+                <br>
+            </div>
+
+            <div id="ingredient">
+                <p>Ingredient:</p>
+                <div id="inline-block">
+                    <div id="quantity">
+                        <textarea name="ingredient"></textarea>
+                        <select>
+                            <option value="1">x1</option>
+                            <option value="2">x2</option>
+                            <option value="3">x3</option>
+                            <option value="4">x4</option>
+                            <option value="4">x5</option>
+                            <option value="4">x6</option>
+                            <option value="4">x7</option>
+                        </select>
+                    </div>
+                    <div id="quantity">
+                        <textarea name="ingredient"></textarea>
+                        <select>
+                            <option value="1">x1</option>
+                            <option value="2">x2</option>
+                            <option value="3">x3</option>
+                            <option value="4">x4</option>
+                            <option value="4">x5</option>
+                            <option value="4">x6</option>
+                            <option value="4">x7</option>
+                        </select>
+                    </div>
+                    <div id="quantity">
+                        <textarea name="ingredient"></textarea>
+                        <select>
+                            <option value="1">x1</option>
+                            <option value="2">x2</option>
+                            <option value="3">x3</option>
+                            <option value="4">x4</option>
+                            <option value="4">x5</option>
+                            <option value="4">x6</option>
+                            <option value="4">x7</option>
+                        </select>
+                    </div>
+                    <button id="btn"><i class="fas fa-plus-circle"></i></button>
+                </div>
+            </div>
+
+            <div id="direction">
+                <p>Direction:</p>
+                <textarea name="direction"></textarea>
+                <br>
+                <textarea name="direction"></textarea>
+                <br>
+                <textarea name="direction"></textarea>
+                <br>
+                <button id="btn"><i class="fas fa-plus-circle"></i></button>
+            </div>
+
+            <div id="time">
+                <p>Total Cooking Time:</p>
+                <div id="verticalcenter">
+                    <textarea name="time"></textarea>
+                    <span>mins</span>
+                </div>
+            </div>
+
+            <div id="type">
+                <p>Food Type:</p>
+                <input type="checkbox" name="vegetable" value="vegetable">
+                <label for="vegetable">Vegetable</label>
+                <!-- <input type="checkbox" name="beef" value="beef">
+                    <label for="beef">Beef</label>
+                    <input type="checkbox" name="fish" value="fish">
+                    <label for="fish">Fish</label>
+                    <input type="checkbox" name="shrimp" value="shrimp">
+                    <label for="shrimp">Shrimp</label> -->
+                <input type="checkbox" name="meat" value="meat">
+                <label for="meat">Meat</label>
+                <!-- <input type="checkbox" name="chicken" value="chicken">
+                    <label for="chicken">Chicken</label> -->
+                <input type="checkbox" name="egg" value="egg">
+                <label for="egg">Egg</label>
+                <input type="checkbox" name="pork" value="pork">
+                <label for="pork">Pork</label>
+                <input type="checkbox" name="pork" value="">
+                <label for="pork">Other</label>
+            </div>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</section>

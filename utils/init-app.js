@@ -9,22 +9,12 @@ const path = require('path');
 
 module.exports = () => {
   let app = express();
-  app.engine("handlebars", hb({ defaultLayout: "main" }));
-  app.set("view engine", "handlebars");
-  app.use(bodyParser.urlencoded({ extended: false }));
+  app.engine("handlebars", hb({ defaultLayout: "main" }));//set up main.hbs as default layout in hbs
+  app.set("view engine", "handlebars");//set view engine for hb
+  app.use(bodyParser.urlencoded({ extended: false }));//to view req.body
   app.use(bodyParser.json());
-  app.use("/public", express.static(path.join(__dirname, "public")));
+  app.use("/public", express.static(path.join(__dirname, "public")));//same as express.static(__dirname+'/public)
 
-  //handle multiple users using the authentication information the users input
-  /*
-  app.use(
-    basicAuth({
-      authorizer: new AuthChallenger(knex),//knex
-      authorizeAsync: true,
-      challenge: true,
-      realm: "Food Recipe Finder Project"
-    })
-  );
-  */
+
   return app;
 };

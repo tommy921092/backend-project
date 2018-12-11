@@ -24,7 +24,7 @@ class RecipeRouter {
     });
     //get saved recipes
     router.get("/save", (req, res) => {
-      return this.recipeService.listBySave(req.auth.user);
+      return this.recipeService.listBySave(req.user.username);
     });
     //add recipe
     router.post("/addRecipe", (req, res) => {
@@ -39,7 +39,7 @@ class RecipeRouter {
         // insert the req.file.location to our knex table
         console.log(req.file.location);
         this.recipeService.addRecipe(
-          req.auth.user,
+          req.user.username,
           req.body.content,
           req.file.location
         );
