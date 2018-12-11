@@ -1,0 +1,22 @@
+<div>
+    <h1>Profile Page</h1>
+    <p>Username: {{name}}</p>
+    <p>Email: {{email}}</p>
+    <p>Profile Picture: <img src={{profilepic}}></p>
+
+    <div>
+    <a href='/logout'><button>Logout</button></a>
+    <a href='/'><button>Back to Index</button></a>
+    </div>
+
+    <p>Update Details</p>
+    <form action="/profile" method="post">
+        <div>
+            <label>Username:</label>
+            <input id="username" name="username" type="text" placeholder="Choose wisely">
+        </div>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+</div>

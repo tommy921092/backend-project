@@ -1,3 +1,4 @@
+const path = require('path');
 //router.js
 const passport = require('passport');
 
@@ -16,20 +17,23 @@ module.exports = (express) => {
     res.send('Here you go, a secret');
   });
 
-  // login
+  // local login
   router.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/login.html');
+    res.sendFile(path.join(__dirname, '../public', 'login.html'));
   });
 
   router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
+    successRedirect: '/profile',
     failureRedirect: '/error'
   }));
 
   // facebook routes
   router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: '/'
-  }), (req, res) => res.redirect('/'));
+  }), (req, res) => {
+    console.log('successfully reached callback URI');
+    res.redirect('/profile')
+  }); // /profile refers to get request from UserRouter.js
 
   router.get('/auth/facebook', passport.authenticate('facebook', {
     scope: ['public_profile', 'email']
@@ -40,7 +44,7 @@ module.exports = (express) => {
     failureRedirect: '/'
   }), (req,res) => {
     console.log('successfully reached callback URI');
-    res.redirect('/');
+    res.redirect('/profile');
   });
 
   router.get('/auth/google', passport.authenticate('google', {
@@ -49,7 +53,7 @@ module.exports = (express) => {
 
   // sign-up
   router.get('/signup', (req, res) => {
-    res.sendFile(__dirname + '/signup.html');
+    res.sendFile(path.join(__dirname, '../public', '/signup.html'));
   });
 
   router.post('/signup', passport.authenticate('local-signup', {
@@ -61,9 +65,11 @@ module.exports = (express) => {
     res.send('You are not logged in!');
   });
 
-  // router.get('/', (req, res) => {
-  //   res.sendFile(__dirname + '/index.html');
-  // });
+  router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public', '/index.html'));
+  });
+
+  // profile page redirect --> moved to UserRouter
 
   // auth logout
   router.get('/logout', (req, res) => {
