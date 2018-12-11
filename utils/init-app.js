@@ -13,7 +13,7 @@ module.exports = () => {
   app.set("view engine", "handlebars");//set view engine for hb
   app.use(bodyParser.urlencoded({ extended: false }));//to view req.body
   app.use(bodyParser.json());
-  app.use("/public", express.static(path.join(__dirname, "public")));//same as express.static(__dirname+'/public)
+  //same as express.static(__dirname+'/public)
 
 
   return app;

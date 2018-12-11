@@ -4,6 +4,7 @@ const knex = require("knex")(knexFile);
 const port = 3000 || process.env.PORT;
 const express = require("express");
 const https = require("https");
+const path = require("path");
 // const RecipeService = require("");
 
 const isLoggedIn = require("./utils/guard").isLoggedIn;
@@ -35,13 +36,18 @@ app.use(
   })
 );
 setupPassport(app);
-
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/", LoginRouter);
 //should add isLoggedIn to ensure services only are accessible to users
 app.use("/", new RecipeAPIRouter(recipeAPIService).router());
 app.use("/", new RecipeRouter(recipeService).router());
 app.get("/", (req, res) => {
-  res.render("recipeInfo");
+  recipeAPIService.findRandomRecipe().then(data => {
+    let imageArr = data.recipes.map(ele => ele.image);
+    let titleArr = data.recipes.map(ele => ele.title);
+    let idArr = data.recipes.map(ele => ele.id);
+    res.render("home", { image: imageArr, title: titleArr, recipeID: idArr });
+  });
 });
 // app.use("/api/recipes",isLoggedIn, new RecipeRouter(recipeService).router());
 https.createServer(options, app).listen(port);

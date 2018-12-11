@@ -10,16 +10,17 @@ class RecipeAPIRouter {
       const name = req.query.name;
       const excludeIngredients = req.query.excludeIngredients;
       if (ingredient) {
-        return this.recipeAPIService.findByIngredients(ingredient); //ingredients=apple%2Csugar%2Conion
+        this.recipeAPIService.findByIngredients(ingredient); //ingredients=apple%2Csugar%2Conion
       } else if (name) {
-        return this.recipeAPIService.findByName(name);
+        this.recipeAPIService.findByName(name);
       } else {
         return this.recipeAPIService.findRandomRecipe();
       }
     });
 
     router.get("/searchByAPI/recipe", (req, res) => {
-      return this.recipeAPIService.getRecipeInfo(req.query.id)
+      this.recipeAPIService.getRecipeInfo(req.query.id);
+      res.render("recipeInfo");
     });
     return router;
   }

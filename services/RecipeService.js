@@ -13,7 +13,7 @@ class RecipeService {
           "users.username",
           "recipes.time_taken"
         )
-        .innerJoin("users", "recipes.user_id", "users.id")
+        .fullOuterJoin("users", "recipes.user_id", "users.id")
         .where("recipes.recipe_name", "like", keyword);
       console.log(query);
       return query;
@@ -36,9 +36,9 @@ class RecipeService {
           "recipes.time_taken",
           this.knex.raw("ARRAY_AGG(tags.tagname) as tags")
         )
-        .innerJoin("users", "recipes.user_id", "users.id")
-        .innerJoin("recipes_tags", "recipes_tags.recipe_id", "recipes.id")
-        .innerJoin("tags", "recipes_tags.tag_id", "tags.id")
+        .fullOuterJoin("users", "recipes.user_id", "users.id")
+        .fullOuterJoin("recipes_tags", "recipes_tags.recipe_id", "recipes.id")
+        .fullOuterJoin("tags", "recipes_tags.tag_id", "tags.id")
         .whereIn("tags.tagname", Arr)
         .groupBy("recipes.id", "users.username"); //{...tags: ['dessert','vegan']}
       console.log(query);
@@ -110,8 +110,8 @@ class RecipeService {
           "users.username",
           "recipes.time_taken"
         )
-        .innerJoin("users_recipes", "users_recipes.recipe_id", "recipes.id")
-        .innerJoin("users", "users.id", "users_recipes.user_id")
+        .fullOuterJoin("users_recipes", "users_recipes.recipe_id", "recipes.id")
+        .fullOuterJoin("users", "users.id", "users_recipes.user_id")
         .where("users.username", user);
     } catch (e) {
       console.log(e);
@@ -146,8 +146,8 @@ class RecipeService {
     try {
       let query = await this.knex("comments")
         .select("users.id", "users.username", "comments.content")
-        .innerJoin("recipes", "comments.recipe_id", "recipes.id")
-        .innerJoin("users", "comments.user_id", "users.id")
+        .fullOuterJoin("recipes", "comments.recipe_id", "recipes.id")
+        .fullOuterJoin("users", "comments.user_id", "users.id")
         .where("recipes.id", recipeID);
       console.log(query);
       return query;
