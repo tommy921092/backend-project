@@ -1,9 +1,19 @@
 <div>
-
-    <p>User: {{name}}</p>
+    <h1>Profile Page</h1>
+    <p>Username: {{name}}</p>
     <p>Email: {{email}}</p>
     <p>Profile Picture: <img src={{profilepic}}></p>
 
     <a href='/logout'><button>Logout</button></a>
+
+    <p>Update Details</p>
+    <form action="/profile" method="post">
+        <div>
+            <label>Username:</label>
+            <input id="username" name="username" type="text" placeholder="Choose wisely">
+        </div>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
 
 </div>
