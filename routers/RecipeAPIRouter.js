@@ -19,7 +19,7 @@ class RecipeAPIRouter {
     });
 
     router.get("/searchByAPI/recipe", (req, res) => {
-      return this.recipeAPIService.getRecipeInfo(req.query.id);
+      return this.recipeAPIService.getRecipeInfo(req.query.id)
     });
     return router;
   }

@@ -71,8 +71,7 @@ class RecipeAPIService {
           "recipe_name",
           result.body.title
         );
-        if (query=='') {
-          console.log('test1');
+        if (query == "") {
           await this.knex("recipes").insert({
             recipe_name: result.body.title,
             imageurl: result.body.image,
@@ -80,17 +79,48 @@ class RecipeAPIService {
             time_taken: result.body.readyInMinutes
           });
 
-          let query2 = await this.knex("recipes")
-            .where("recipe_name", result.body.title)
-            .returning("id");
+          let query2 = await this.knex("recipes").where(
+            "recipe_name",
+            result.body.title
+          );
+
           result.body.extendedIngredients.forEach(async ele => {
-            let query3 = await this.knex('ingredients').where('name',ele.name);
-            if (query3=='') {
+            console.log(ele.name);
+            let query3 = await this.knex("ingredients").where(
+              "ingredient_name",
+              ele.name
+            );
+
+            if (query3 == "") {
               //if the ingredient not exist in the table
-              await this.knex("ingredients").insert("name", ele.name);
-              //have to also update the recipeIngredients table
-              // await this.knex("ingredients").insert({});
+              await this.knex("ingredients").insert({
+                ingredient_name: ele.name
+              });
             }
+            let query4 = await this.knex("measures").where(
+              "measure_name",
+              ele.unit
+            );
+            console.log("query4:", query4);
+            if (query4 == "") {
+              //if the measure unit not exist in the table
+              console.log("ele.unit:", ele.unit);
+              await this.knex("measures").insert({ measure_name: ele.unit });
+            }
+
+            let query5 = await this.knex("ingredients")
+              .select("id")
+              .where("ingredients", ele.name);
+            console.log(query5);
+            let query6 = await this.knex("measures")
+              .select("id")
+              .where("measure_name", ele.unit);
+            await this.knex("recipes_ingredients").insert({
+              recipe_id: query2.id,
+              ingredient_id: query5.id,
+              measure_id: query6.id,
+              amount: ele.amount
+            });
           });
         }
         return result.body;

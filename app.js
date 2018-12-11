@@ -2,8 +2,8 @@ const app = require("./utils/init-app")(); //initialize the app
 const knexFile = require("./knexfile").development;
 const knex = require("knex")(knexFile);
 const port = 3000 || process.env.PORT;
-const express = require('express');
-const https = require('https');
+const express = require("express");
+const https = require("https");
 // const RecipeService = require("");
 
 const isLoggedIn = require("./utils/guard").isLoggedIn;
@@ -18,7 +18,7 @@ const options = {
   key: fs.readFileSync("./localhost.key")
 };
 
-const LoginRouter = require("./public/LoginRouter")(express);
+const LoginRouter = require("./routers/LoginRouter")(express);
 const { RecipeRouter, RecipeAPIRouter } = require("./routers");
 const { RecipeService, RecipeAPIService } = require("./services");
 const ViewRouter = require("./ViewRouter");
@@ -40,6 +40,9 @@ app.use("/", LoginRouter);
 //should add isLoggedIn to ensure services only are accessible to users
 app.use("/", new RecipeAPIRouter(recipeAPIService).router());
 app.use("/", new RecipeRouter(recipeService).router());
+app.get("/", (req, res) => {
+  res.render("recipeInfo");
+});
 // app.use("/api/recipes",isLoggedIn, new RecipeRouter(recipeService).router());
 https.createServer(options, app).listen(port);
 console.log("listening on port ", port);
