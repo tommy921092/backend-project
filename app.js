@@ -4,6 +4,7 @@ const knex = require("knex")(knexFile);
 const port = process.env.PORT || 3000;
 const express = require("express");
 const https = require("https");
+const path = require("path");
 
 // const RecipeService = require("");
 
@@ -20,7 +21,7 @@ const options = {
 };
 
 const LoginRouter = require("./routers/LoginRouter")(express);
-const ViewRouter = require("./ViewRouter");
+// const ViewRouter = require("./ViewRouter");
 const { RecipeRouter, RecipeAPIRouter, UserRouter } = require("./routers");
 const { RecipeService, RecipeAPIService, UserService } = require("./services");
 
@@ -38,7 +39,7 @@ app.use(
 );
 setupPassport(app);
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/", LoginRouter);
 app.use("/", new UserRouter(userService).router());
 //should add isLoggedIn to ensure services only are accessible to users

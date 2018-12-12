@@ -9,12 +9,11 @@ class RecipeService {
           "recipes.id",
           "recipes.recipe_name",
           "recipes.imageurl",
-          "recipes.description",
           "users.username",
           "recipes.time_taken"
         )
         .fullOuterJoin("users", "recipes.user_id", "users.id")
-        .where("recipes.recipe_name", "like", keyword);
+        .whereRaw(`LOWER(recipes.recipe_name) LIKE ?`, [`%${keyword}%`]);//for case-insensitive
       console.log(query);
       return query;
     } catch (e) {
@@ -176,7 +175,6 @@ class RecipeService {
   }
 
   async iMakeIt(recipeID, user) {}
-
 }
 
 module.exports = RecipeService;

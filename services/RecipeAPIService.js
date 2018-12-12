@@ -4,7 +4,7 @@ class RecipeAPIService {
   constructor(knex) {
     this.knex = knex;
   }
-  findRecipeByName(name, excludeIngredients) {
+  findByName(name, excludeIngredients) {
     return new Promise((resolve, reject) => {
       if (excludeIngredients) {
         const url =
@@ -16,19 +16,23 @@ class RecipeAPIService {
           .get(url)
           .header("X-RapidAPI-Key", process.env.FOODAPI_KEY)
           .end(function(result) {
-            console.log(result.body);
-            return result.body;
+            if (result) {
+              resolve(result.body);
+            }
+            reject(result.body);
           });
       } else {
         const url =
-          "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?&number=2&query=" +
+          "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?&number=8&query=" +
           name;
         unirest
           .get(url)
           .header("X-RapidAPI-Key", process.env.FOODAPI_KEY)
           .end(function(result) {
-            console.log(result.body);
-            return result.body;
+            if (result) {
+              resolve(result.body);
+            }
+            reject(result.body);
           });
       }
     });
@@ -132,6 +136,24 @@ class RecipeAPIService {
                 amount: result.body.extendedIngredients[i].amount
               });
             }
+            let query7 = await this.knex("tags").where({
+              tagname: result.body.dishTypes[0]
+            });
+            console.log(result.body.dishTypes[0]);
+            console.log("q7:", query7);
+            if (query7 == "") {
+              console.log("tag name not exist in table");
+              await this.knex("tags").insert({
+                tagname: result.body.dishTypes[0]
+              });
+            }
+            let query8 = await this.knex("tags")
+              .where("tagname", result.body.dishTypes[0])
+              .first();
+            await this.knex("recipes_tags").insert({
+              recipe_id: query2.id,
+              tag_id: query8.id
+            });
           }
           if (result) {
             resolve(result.body);
