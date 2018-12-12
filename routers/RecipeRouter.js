@@ -14,7 +14,7 @@ class RecipeRouter {
     });
     //search by name
     router.get("/search", (req, res) => {
-      if (req.query.name) {
+      if (req.query.name) { // this links to the search bar query
         this.recipeService.listByName(req.query.name);
       }
       if (req.query.tags) {

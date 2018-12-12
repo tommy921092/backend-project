@@ -19,7 +19,7 @@ module.exports = express => {
 
   // local login
   router.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public", "login.html"));
+    res.render("login");
   });
 
   router.post(

@@ -1,0 +1,44 @@
+<section id="accessing" class="row">
+    <div id="login" class="col-md-4 col-sm-12 col-12">
+        <h4>LOGIN</h4>
+        <div id="line"></div>
+        <div id="line"></div>
+
+        <form action="/login" method="post">
+            <div id="container">
+                <label>Email:</label>
+                <input type="email" name="username" required>
+            </div>
+            <div id="container">
+                <label>Password:</label>
+                <input type="password" name="password" required>
+            </div>
+            <div>
+                <input type="submit" value="Log In">
+            </div>
+            <div id="container">
+                <!-- facebook login option -->
+                <a class="fa fa-facebook" href='/auth/facebook'></a>
+                <!-- google login option -->
+                <a class="fa fa-google" href='/auth/google'></a>
+            </div>
+        </form>
+
+        <div id="horizonline"></div>
+    </div>
+
+    <div id="middleline">
+    </div>
+
+    <div id="signup" class="col-md-4 col-sm-12 col-12">
+        <h4>SIGN UP</h4>
+
+        <div id="line"></div>
+        <div id="line"></div>
+        <div id="signupblock">
+        <div id="line"></div>
+
+            <a href="/signup"><input type="submit" value="Sign Up"></a>
+        </div>
+
+</section>
