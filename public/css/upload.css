@@ -71,16 +71,29 @@
     margin-top: 50px;
 }
 
-#imgshow{
-    width: 250px;
-    height: 190px;
-    border: 1px solid;
-    text-align: center;
-    margin-left: 50px;
+#imgupload input[]{
+    border:2px solid;
 }
+
 
 #description{
     width: 100%;
+}
+
+textarea{
+    width: 80%;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+#time textarea{
+    width: 20%; 
+}
+
+
+
+#description textarea{
+    height: 100px;
 }
 
 #description p,#ingredient p, #direction p, #time p, #type p{
@@ -91,15 +104,19 @@
     margin-bottom: 20px;
 }
 
-#quantity{
+#ingredient .quantity{
     display:flex;
     align-items: center;
     margin:5px;
 
 }
 
-#quantity select{
+#ingredient .quantity select{
     margin-left: 10px;
+}
+
+#ingredient .number{
+    border:2px solid #3399ff;
 }
 
 #time span{
@@ -126,4 +143,3 @@ input[type="submit"]:hover{
     color:white;
     transition: 0.8s;
 }
-
