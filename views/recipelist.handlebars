@@ -1,0 +1,33 @@
+<section id="searchbar">
+    <h4>Search for your favourite food</h4>
+    <!-- link modify later -->
+    <form action="/search" method="get">
+        <input id="searchbox" type="text" name="name" value="">
+        <input type="submit" value="Search">
+    </form>
+</section>
+<!-- navigation holder -->
+<div class="holder">
+</div>
+
+<!-- item container -->
+<ul id="itemContainer">
+    {{#each obj}}
+    <li>
+        <img src=https://spoonacular.com/recipeImages/{{image}} alt="image">
+        <p>{{title}}</p>
+        <a class="learnmore" href="/searchByAPI/recipe?id={{id}}">Learn More</a>
+    </li>
+    {{/each}}
+
+</ul>
+<script type="text/javascript">
+    $("div.holder").jPages({
+        containerID: "itemContainer",
+        perPage: 3,
+        startPage: 1,
+        startRange: 5,
+        midRange: 5,
+        endRange: 5
+    });
+</script>
