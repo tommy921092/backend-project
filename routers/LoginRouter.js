@@ -16,9 +16,9 @@ module.exports = (express) => {
     res.send('Here you go, a secret');
   });
 
-  // login
-  router.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/login.html');
+  // local login
+  router.get("/login", (req, res) => {
+    res.render("login");
   });
 
   router.post('/login', passport.authenticate('local-login', {
