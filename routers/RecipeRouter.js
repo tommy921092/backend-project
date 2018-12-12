@@ -20,6 +20,7 @@ class RecipeRouter {
     router.get("/search", (req, res) => {
       if (req.query.name) {
         this.recipeService.listByName(req.query.name).then((data)=>{
+          console.log(data);
           res.render("recipeList", {data});
         })
       }
