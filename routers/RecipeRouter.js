@@ -9,23 +9,24 @@ class RecipeRouter {
     const router = express.Router();
     //get recipe details
     router.get("/search/recipe", (req, res) => {
-      this.recipeService.showDetails(req.query.id).then((data)=>{
-        console.log(data.basicInfo);
-        res.render('recipeInfo',{data})
-      });//req.query.id = recipes.id in our database
+      this.recipeService.showDetails(req.query.id).then(data => {
+        res.render("recipeInfo", { data });
+      }); //req.query.id = recipes.id in our database
 
       // this.recipeService.listComment(req.query.id);
     });
     //search by name
     router.get("/search", (req, res) => {
       if (req.query.name) {
-        this.recipeService.listByName(req.query.name).then((data)=>{
+        this.recipeService.listByName(req.query.name).then(data => {
           console.log(data);
-          res.render("recipeList", {data});
-        })
+          res.render("recipeList", { data });
+        });
       }
       if (req.query.tags) {
-        this.recipeService.listByTags(req.query.tags);//accept ?tags=apple%2Csugar%2Conion
+        this.recipeService.listByTags(req.query.tags).then(data => {
+          console.log(data);
+        });
       }
     });
     //get saved recipes
@@ -56,7 +57,7 @@ class RecipeRouter {
       return this.recipeService
         .addComment(req.query.name, req.body.comment, req.auth.user)
         .then(() => {
-          this.recipeService.listComment(req.query.q);
+          this.recipeService.listComment(req.query.id);
         });
     });
     //rate recipe
@@ -65,7 +66,7 @@ class RecipeRouter {
     });
 
     router.post("/save", (req, res) => {
-      return this.recipeService.save(req.query.q, req.auth.user);
+      return this.recipeService.save(req.query.id, req.auth.user);
     });
 
     router.post("/imakeit", (req, res) => {

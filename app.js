@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", LoginRouter);
 app.use("/", new UserRouter(userService).router());
 //should add isLoggedIn to ensure services only are accessible to users
-app.use("/", new RecipeAPIRouter(recipeAPIService).router());
+app.use("/", new RecipeAPIRouter(recipeAPIService, recipeService).router());
 app.use("/", new RecipeRouter(recipeService).router());
 app.get("/", (req, res) => {
   recipeAPIService.findRandomRecipe().then(data => {

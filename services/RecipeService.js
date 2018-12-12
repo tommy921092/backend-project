@@ -52,6 +52,13 @@ class RecipeService {
   async showDetails(recipeID) {
     //tested
     try {
+      let lastID;
+      if (recipeID=='API') {
+        recipeID = await this.knex('recipes').select('id').orderBy('id','desc').first();
+        lastID = recipeID.id;
+        recipeID = lastID;
+        console.log(recipeID);
+      }
       let query = await this.knex("recipes")
         .select(
           "recipes.recipe_name",

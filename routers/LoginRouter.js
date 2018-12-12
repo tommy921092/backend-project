@@ -1,7 +1,7 @@
 //router.js
-const passport = require('passport');
+const passport = require("passport");
 
-module.exports = (express) => {
+module.exports = express => {
   const router = express.Router();
 
   function isLoggedIn(req, res, next) {
@@ -9,11 +9,11 @@ module.exports = (express) => {
       return next();
     }
 
-    res.redirect('/login');
+    res.redirect("/login");
   }
 
-  router.get('/secret', isLoggedIn, (req, res) => {
-    res.send('Here you go, a secret');
+  router.get("/secret", isLoggedIn, (req, res) => {
+    res.send("Here you go, a secret");
   });
 
   // local login
@@ -21,35 +21,52 @@ module.exports = (express) => {
     res.render("login");
   });
 
-  router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
-    failureRedirect: '/error'
-  }));
+  router.post(
+    "/login",
+    passport.authenticate("local-login", {
+      successRedirect: "/",
+      failureRedirect: "/error"
+    })
+  );
 
   // facebook routes
-  router.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    failureRedirect: '/'
-  }), (req, res) => res.redirect('/'));
+  router.get(
+    "/auth/facebook/callback",
+    passport.authenticate("facebook", {
+      failureRedirect: "/"
+    }),
+    (req, res) => res.redirect("/")
+  );
 
-  router.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['public_profile', 'email']
-  }));
+  router.get(
+    "/auth/facebook",
+    passport.authenticate("facebook", {
+      scope: ["public_profile", "email"]
+    })
+  );
 
   // google routes
-  router.get('/auth/google/callback', passport.authenticate('google', {
-    failureRedirect: '/'
-  }), (req,res) => {
-    console.log('successfully reached callback URI');
-    res.redirect('/');
-  });
+  router.get(
+    "/auth/google/callback",
+    passport.authenticate("google", {
+      failureRedirect: "/"
+    }),
+    (req, res) => {
+      console.log("successfully reached callback URI");
+      res.redirect("/");
+    }
+  );
 
-  router.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
-  }));
+  router.get(
+    "/auth/google",
+    passport.authenticate("google", {
+      scope: ["profile", "email"]
+    })
+  );
 
   // sign-up
-  router.get('/signup', (req, res) => {
-    res.sendFile(__dirname + '/signup.html');
+  router.get("/signup", (req, res) => {
+    res.render("signup");
   });
 
   router.post(
@@ -60,8 +77,8 @@ module.exports = (express) => {
     })
   );
 
-  router.get('/error', (req, res) => {
-    res.send('You are not logged in!');
+  router.get("/error", (req, res) => {
+    res.send("You are not logged in!");
   });
 
   // router.get('/', (req, res) => {
@@ -69,13 +86,13 @@ module.exports = (express) => {
   // });
 
   // auth logout
-  router.get('/logout', (req, res) => {
+  router.get("/logout", (req, res) => {
     req.logout(); // can be unreliable - does not clear our session
     req.session.destroy();
-    console.log('logging out and destroying express session');
+    console.log("logging out and destroying express session");
     // res.send('Logging out!');
-    res.redirect('/');
-  })
+    res.redirect("/");
+  });
 
   return router;
 };

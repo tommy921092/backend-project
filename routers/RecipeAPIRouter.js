@@ -1,7 +1,8 @@
 const express = require("express");
 class RecipeAPIRouter {
-  constructor(recipeAPIService) {
+  constructor(recipeAPIService, recipeService) {
     this.recipeAPIService = recipeAPIService;
+    this.recipeService = recipeService;
   }
   router() {
     const router = express.Router();
@@ -22,8 +23,12 @@ class RecipeAPIRouter {
     });
 
     router.get("/searchByAPI/recipe", (req, res) => {
-      this.recipeAPIService.getRecipeInfo(req.query.id);
-      res.render("recipeInfo");
+      this.recipeAPIService.getRecipeInfo(req.query.id).then(() => {
+        this.recipeService.showDetails('API').then(data => {
+          // get recipe info from database
+          res.render("recipeInfo", { data });
+        });
+      }); //get detail info and save to database
     });
     return router;
   }
