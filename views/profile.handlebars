@@ -1,29 +1,41 @@
-<div class="container">
-    <h1>Profile Page</h1>
-    <img src={{profilepic}}>
-    <p>Username: {{name}}</p>
-    <p>Email: {{email}}</p>
+<link rel="stylesheet" href="/css/profile.css" />
 
-    <div>
-        <a href='/logout'><button>Logout</button></a>
-        <a href='/'><button>Back to Index</button></a>
+<body style="background: white;">
+    <div id="container">
+        <h4>Your Profile</h4>
+
+        <div id="userinfo">
+            <div id="userphoto">
+                <img src={{profilepic}}>
+                <form action="/image-upload" enctype='multipart/form-data' method="post">
+                    <div>
+                        <label>Profile Picture:</label>
+                        <input id="image" name="image" type="file" accept="image/png, image/jpeg">
+                    </div>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <div id="setting">
+                <div id="currentinfo">
+                    <p>Username: {{name}}</p>
+                    <p>Email: {{email}}</p>
+                    <div>
+                        <a href='/logout'><button>Logout</button></a>
+                        <a href='/'><button>Home</button></a>
+                    </div>
+                </div>
+
+                <div id="updateinfo">
+                    <p>Update Details</p>
+                    <form action="/profile" method="post">
+                        <div>
+                            <label>Username:</label>
+                            <input id="username" name="username" type="text" placeholder="Choose wisely">
+                        </div>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <p>Update Details</p>
-    <form action="/profile" method="post">
-        <div>
-            <label>Username:</label>
-            <input id="username" name="username" type="text" placeholder="Choose wisely">
-        </div>
-        <input type="submit" value="Submit">
-    </form>
-    <br>
-    <form action="/image-upload" enctype='multipart/form-data' method="post">
-        <div>
-            <label>Profile Picture:</label>
-            <input id="image" name="image" type="file" accept="image/png, image/jpeg">
-        </div>
-        <input type="submit" value="Submit">
-    </form>
-
-</div>
+</body>

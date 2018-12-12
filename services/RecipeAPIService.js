@@ -24,7 +24,7 @@ class RecipeAPIService {
           });
       } else {
         const url =
-          "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?&number=8&query=" +
+          "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?&number=4&query=" +
           name;
         unirest
           .get(url)
@@ -142,8 +142,6 @@ class RecipeAPIService {
             let query7 = await this.knex("tags").where({
               tagname: result.body.dishTypes[0]
             });
-            console.log(result.body.dishTypes[0]);
-            console.log("q7:", query7);
             if (query7 == "") {
               console.log("tag name not exist in table");
               await this.knex("tags").insert({

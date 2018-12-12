@@ -1,3 +1,4 @@
+const path = require("path");
 //router.js
 const passport = require("passport");
 
@@ -24,7 +25,7 @@ module.exports = express => {
   router.post(
     "/login",
     passport.authenticate("local-login", {
-      successRedirect: "/",
+      successRedirect: "/profile",
       failureRedirect: "/error"
     })
   );
@@ -35,8 +36,11 @@ module.exports = express => {
     passport.authenticate("facebook", {
       failureRedirect: "/"
     }),
-    (req, res) => res.redirect("/")
-  );
+    (req, res) => {
+      // console.log("successfully reached callback URI");
+      res.redirect("/profile");
+    }
+  ); // /profile refers to get request from UserRouter.js
 
   router.get(
     "/auth/facebook",
@@ -52,8 +56,8 @@ module.exports = express => {
       failureRedirect: "/"
     }),
     (req, res) => {
-      console.log("successfully reached callback URI");
-      res.redirect("/");
+      // console.log("successfully reached callback URI");
+      res.redirect("/profile");
     }
   );
 
@@ -81,9 +85,7 @@ module.exports = express => {
     res.send("You are not logged in!");
   });
 
-  // router.get('/', (req, res) => {
-  //   res.sendFile(__dirname + '/index.html');
-  // });
+  // profile page redirect --> moved to UserRouter
 
   // auth logout
   router.get("/logout", (req, res) => {

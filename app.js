@@ -29,7 +29,7 @@ const recipeService = new RecipeService(knex);
 const recipeAPIService = new RecipeAPIService(knex);
 const userService = new UserService(knex);
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
   session({
@@ -54,6 +54,7 @@ app.get("/", (req, res) => {
     let idArr = data.recipes.map(ele => ele.id);
     res.render("home", { image: imageArr, title: titleArr, recipeID: idArr });
   });
+  // res.render('home');
 });
 // app.use("/api/recipes",isLoggedIn, new RecipeRouter(recipeService).router());
 https.createServer(options, app).listen(port);
