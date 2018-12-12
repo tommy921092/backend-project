@@ -49,11 +49,14 @@
     border:0;
 }
 
+<<<<<<< HEAD
 #information input[type="submit"]:hover{
     color:#3399ff;
     transition: 0.8s;
 }
 
+=======
+>>>>>>> 580cd683245410b13a715d9be0739e5fa86098f8
 #horizonline{
     text-align: center;
     width: 100%;
@@ -75,7 +78,11 @@
     font-size: 10px;
 }
 
+<<<<<<< HEAD
 #upload input[type="submit"]:hover{
+=======
+input[type="submit"]:hover{
+>>>>>>> 580cd683245410b13a715d9be0739e5fa86098f8
     background-color:black;
     color:white;
     transition: 0.8s;
@@ -84,11 +91,17 @@
 #favourite{
     width: 100%;
     height: auto;
+<<<<<<< HEAD
+=======
+    /* display: flex;
+    justify-content: flex-start; */
+>>>>>>> 580cd683245410b13a715d9be0739e5fa86098f8
 }
 
 #history{
     width: 100%;
     height: auto;
+<<<<<<< HEAD
 }
 
 #searchresult{
@@ -232,3 +245,8 @@ input[type="submit"]:hover{
     width: 100%;
     height: auto;
 }  */
+=======
+    /* display: flex;
+    justify-content: flex-start; */
+}
+>>>>>>> 580cd683245410b13a715d9be0739e5fa86098f8

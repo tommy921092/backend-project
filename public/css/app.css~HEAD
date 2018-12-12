@@ -1,0 +1,112 @@
+#body{
+    background-color: #ffe066;
+}
+
+/*  */
+@media (min-width: 768px) {
+.navbar-brand.title
+    {
+        width: 100%;
+        left: 0;
+        text-align: center;
+        color: #595959;
+        font-weight: bold;
+        font-size: 20px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+}
+
+nav{
+    height:auto;
+    font-size: 12px;
+}
+
+/* search */
+#searchbar{
+    margin: 50px;
+}
+
+#searchbar h4{
+    margin: 20px;
+    text-align: center;
+}
+
+#searchbar form{
+    margin: 20px;
+    text-align: center;
+}
+
+#searchbox{
+    width: 50%;
+}
+
+/* slideshows */
+#slideshow img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+}
+
+#slideshow{
+    display: block;
+    width: 100%; 
+    height: 100%;
+}
+
+#slideshow .learnmore{
+    color:black;
+    background-color: white;
+    width: 40%;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* footer */
+
+.footer-bs {
+    background-color: #3c3d41;
+	padding: 40px 40px;
+	color: rgba(255,255,255,1.00);
+	margin-bottom: 20px;
+}
+
+.footer-bs  h2 { 
+    margin:0px 0px 10px; 
+}
+
+.footer-bs p { 
+    font-size:12px; color:rgba(255,255,255,0.70); 
+}
+
+.footer-bs .footer-nav h4 {
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	margin-bottom:10px;
+}
+
+.footer-bs .footer-ns h4 {
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	margin-bottom:10px;
+}
+.footer-bs .footer-ns p { font-size:12px; color:rgba(255,255,255,0.70); }
+
+@media (min-width: 768px) {
+	.footer-bs .footer-nav { border-left:solid 1px rgba(255,255,255,0.10); }
+}
+
+.darker{
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#slideshow .carousel-caption{
+    padding-top:0;
+    font-size: 10px;
+}
+
+#slideshow h5{
+    font-size: 15px;
+}

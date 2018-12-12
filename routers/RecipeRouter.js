@@ -14,7 +14,6 @@ class RecipeRouter {
     });
     //search by name
     router.get("/search", (req, res) => {
-      console.log(req.user);
       if (req.query.name) {
         this.recipeService.listByName(req.query.name);
       }
