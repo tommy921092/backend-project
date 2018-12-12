@@ -76,7 +76,7 @@ module.exports = express => {
   router.post(
     "/signup",
     passport.authenticate("local-signup", {
-      successRedirect: "/",
+      successRedirect: "/profile",
       failureRedirect: "/error"
     })
   );
