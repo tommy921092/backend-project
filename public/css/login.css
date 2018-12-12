@@ -38,14 +38,12 @@ h4{
     align-items: center;
 }
 
-form p{
-    margin-bottom: 3px;
-    margin-top: 10px;
-    height:100%;
-    margin-left:10px;
+#accessing p{
+    text-align: center;
+    
 }
 
-input[type="submit"]{
+#logincolor input[type="submit"]{
     display: block;
     height:100%;
     margin: 20px;
@@ -54,23 +52,54 @@ input[type="submit"]{
     padding-left: 5px;
     padding-right: 5px;
     border-radius: 20px;
+    padding:5px 10px;
 }
 
-input[type="submit"]:hover{
+
+
+#logincolor input[type="submit"]:hover{
     background-color:black;
     color:white;
     transition: 0.8s;
 }
 
-#login input[type="text"]{
-    width: 90%;
+#signupcolor input[type="submit"]{
+    display: block;
+    height:100%;
+    margin: 20px;
+    border: 1px solid #00b36b;
+    background: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 20px;
+    padding:5px 10px;
+    background-color:#00ff99;
+}
+
+#signupcolor input[type="submit"]:hover{
+    background-color:#00b36b;
+    color:white;
+}
+
+#signupcolor a:link {
+    color:#00b36b;
+}
+
+#signupcolor a:hover {
+    color:#00b36b;
+}
+  
+
+#login input[type="email"], #login input[type="password"]{
+    width: 100%;
     height:100%;
     border: 1px solid;
     border-radius: 5px;
     margin-left:10px;
+    padding:5px;
 }
 
-#container{
+#accessing .container{
     margin-top: 10px;
     margin-bottom: 5px;
 }
@@ -79,34 +108,6 @@ input[type="submit"]:hover{
     height:250px;
     width:2px;
     background-color:#d9d9d9;
-}
-
-#signup{
-    width:49%;
-    display: flex;
-    margin: 0px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-#signupblock{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 14px;
-}
-
-@media only screen and (max-width: 768px) {
-    #signupblock {
-        margin-top: 0px;
-    }
-}
-
-#signupblock p{
-    margin: 17px;
 }
 
 #icons{
@@ -144,41 +145,13 @@ input[type="submit"]:hover{
     color: white;
 }
 
-@media only screen and (max-width: 768px) {
-    #middleline {
-      display:none;
-    }
-}
+
 
 #horizonline{
     width: 300px;
     height: 1px;
     margin-bottom: 20px;
     background-color:#d9d9d9;
-}
-
-@media only screen and (min-width: 768px) {
-    #horizonline {
-      display:none;
-    }
-}
-
-
-#signupblock button[type="button"]{
-    border-radius: 20px;
-    margin-bottom: 15px;
-}
-
-#signupblock input[type="text"]{
-    width: 90%;
-    height:100%;
-    border: 1px solid;
-    border-radius: 5px;
-    margin-left:10px;
-}
-
-#signupblock p{
-    margin-bottom: 0px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -191,3 +164,4 @@ input[type="submit"]:hover{
         justify-content: center;
     }
 }
+

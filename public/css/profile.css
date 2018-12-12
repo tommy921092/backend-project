@@ -1,4 +1,46 @@
-#profilebottom{
+#container{
+    padding:10px;
+}
+
+#container h4{
+    text-align: center;
+    color:black;
+    width:100%;
+    font-weight:bold;
+} 
+
+#container img{
+    width:200px;
+    height:200px;
+    border-radius: 30px;
+}
+
+#userphoto{
+    border:1px solid;
+    width:50%;
+    text-align: center;
+}
+
+#currentinfo{
+    border:1px solid;
+    width:50%;
+    text-align: center;
+}
+
+#updateinfo{
+    border:1px solid;
+    width:50%;
+    text-align: center;
+}
+
+#setting{
+    border:1px solid;
+    width:50%;
+    display:flex;
+    justify-content: flex-start;
+}
+
+/* #profilebottom{
     display: flex;
     flex-direction: row;
     height: auto;
@@ -142,4 +184,4 @@
     padding:10px 0px;
     border: 0;
     font-size: 10px;
-}
+} */
