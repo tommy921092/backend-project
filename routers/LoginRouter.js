@@ -4,6 +4,7 @@ const passport = require("passport");
 module.exports = express => {
   const router = express.Router();
 
+  // prevent users from accessing certain parts of app
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
       return next();
@@ -12,19 +13,15 @@ module.exports = express => {
     res.redirect("/login");
   }
 
-  router.get("/secret", isLoggedIn, (req, res) => {
-    res.send("Here you go, a secret");
-  });
-
-  // local login
   router.get("/login", (req, res) => {
     res.render("login");
   });
 
+  // local login
   router.post(
     "/login",
     passport.authenticate("local-login", {
-      successRedirect: "/",
+      successRedirect: "/profile",
       failureRedirect: "/error"
     })
   );
@@ -35,7 +32,10 @@ module.exports = express => {
     passport.authenticate("facebook", {
       failureRedirect: "/"
     }),
-    (req, res) => res.redirect("/")
+    (req, res) => {
+      console.log("successfully reached callback URI");
+      res.redirect("/profile")
+    }
   );
 
   router.get(
@@ -53,7 +53,7 @@ module.exports = express => {
     }),
     (req, res) => {
       console.log("successfully reached callback URI");
-      res.redirect("/");
+      res.redirect("/profile");
     }
   );
 
@@ -77,20 +77,16 @@ module.exports = express => {
     })
   );
 
+  // error route
   router.get("/error", (req, res) => {
     res.send("You are not logged in!");
   });
-
-  // router.get('/', (req, res) => {
-  //   res.sendFile(__dirname + '/index.html');
-  // });
 
   // auth logout
   router.get("/logout", (req, res) => {
     req.logout(); // can be unreliable - does not clear our session
     req.session.destroy();
     console.log("logging out and destroying express session");
-    // res.send('Logging out!');
     res.redirect("/");
   });
 

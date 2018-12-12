@@ -9,8 +9,17 @@ class UserRouter {
   router() {
     const router = express.Router();
 
+    // prevent users from accessing certain parts of app
+    function isLoggedIn(req, res, next) {
+      if (req.isAuthenticated()) {
+        return next();
+      }
+  
+      res.redirect("/login");
+    }
+
     // generate profile page
-    router.get("/profile", (req, res) => {
+    router.get("/profile", isLoggedIn, (req, res) => {
       console.log(req.user.id);
 
       this.UserService.getProfile(req.user.id).then(function (result) {
@@ -24,7 +33,7 @@ class UserRouter {
             if (result[0].profilepicture) {
               return result[0].profilepicture;
             } else {
-              return "../assets/images/profile-stock.jpg"
+              return "../assets/profile-stock.jpg"
             }
           }
         })
@@ -52,7 +61,7 @@ class UserRouter {
             if (result[0].profilepicture) {
               return result[0].profilepicture;
             } else {
-              return "../assets/images/profile-stock.jpg";
+              return "../assets/profile-stock.jpg";
             }
           }
         })
@@ -84,7 +93,7 @@ class UserRouter {
               if (result[0].profilepicture) {
                 return result[0].profilepicture;
               } else {
-                return "../assets/images/profile-stock.jpg";
+                return "../assets/profile-stock.jpg";
               }
             }
           })
