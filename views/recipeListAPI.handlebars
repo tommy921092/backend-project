@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/css/recipeList.css">
 <link rel="stylesheet" href="/css/searchpage.css">
 <section id="searchbar">
-    <h4>Search for your favorite food in DATABASE</h4>
+    <h4>Search for your favorite food by API service</h4>
     <!-- link modify later -->
     <form action="/search" method="get">
         <input id="searchbox" type="text" name="name" value="">
@@ -15,15 +15,13 @@
 <!-- item container -->
 <section id="searchresult">
     <div id="searchbody">
-        <p>{{data.length}} matching results for {{req.body}}</p>
         <ul id="itemContainer">
-            {{#each data }}
+            {{#each obj}}
             <li>
-                <img src={{imageurl}} alt="image">
-                <h6>{{recipe_name}}</h6>
-                <p>Created by: {{username}}</p>
-                <p>Cooking Time: {{time_taken}} mins</p>
-                <a class="learnmore" href="/search/recipe?id={{id}}">Learn More</a>
+                <img src=https://spoonacular.com/recipeImages/{{image}} alt="image">
+                <h6>{{title}}</h6>
+                <p>Cooking Time {{readInMinutes}}</p>
+                <a class="learnmore" href="/searchByAPI/recipe?id={{id}}">Learn More</a>
             </li>
             {{/each}}
         </ul>

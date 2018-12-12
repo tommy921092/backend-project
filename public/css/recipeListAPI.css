@@ -36,3 +36,7 @@ a.jp-disabled:hover {
 .holder span {
   margin: 0 5px;
 }
+
+ul#itemContainer {
+  list-style: none;
+}

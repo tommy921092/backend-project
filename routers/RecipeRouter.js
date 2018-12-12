@@ -8,17 +8,23 @@ class RecipeRouter {
   router() {
     const router = express.Router();
     //get recipe details
-    router.get("/recipe", (req, res) => {
-      this.recipeService.showDetails(req.query.q);
-      this.recipeService.listComment(req.query.q);
+    router.get("/search/recipe", (req, res) => {
+      this.recipeService.showDetails(req.query.id).then((data)=>{
+        console.log(data.basicInfo);
+        res.render('recipeInfo',{data})
+      });//req.query.id = recipes.id in our database
+
+      // this.recipeService.listComment(req.query.id);
     });
     //search by name
     router.get("/search", (req, res) => {
       if (req.query.name) {
-        this.recipeService.listByName(req.query.name);
+        this.recipeService.listByName(req.query.name).then((data)=>{
+          res.render("recipeList", {data});
+        })
       }
       if (req.query.tags) {
-        this.recipeService.listByTags(req.query.tags);
+        this.recipeService.listByTags(req.query.tags);//accept ?tags=apple%2Csugar%2Conion
       }
     });
     //get saved recipes
