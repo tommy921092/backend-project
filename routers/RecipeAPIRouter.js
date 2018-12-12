@@ -14,7 +14,8 @@ class RecipeAPIRouter {
       } else if (name) {
         this.recipeAPIService.findByName(name).then(data => {
           let obj = data.results;
-          res.render("recipeList", { obj });
+          console.log(obj);
+          res.render("recipeListAPI", { obj });
         });
       } else {
         return this.recipeAPIService.findRandomRecipe();

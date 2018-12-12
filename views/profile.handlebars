@@ -1,12 +1,12 @@
-<div>
+<div class="container">
     <h1>Profile Page</h1>
+    <img src={{profilepic}}>
     <p>Username: {{name}}</p>
     <p>Email: {{email}}</p>
-    <p>Profile Picture: <img src={{profilepic}}></p>
 
     <div>
-    <a href='/logout'><button>Logout</button></a>
-    <a href='/'><button>Back to Index</button></a>
+        <a href='/logout'><button>Logout</button></a>
+        <a href='/'><button>Back to Index</button></a>
     </div>
 
     <p>Update Details</p>
@@ -15,7 +15,14 @@
             <label>Username:</label>
             <input id="username" name="username" type="text" placeholder="Choose wisely">
         </div>
-        <br>
+        <input type="submit" value="Submit">
+    </form>
+    <br>
+    <form action="/image-upload" enctype='multipart/form-data' method="post">
+        <div>
+            <label>Profile Picture:</label>
+            <input id="image" name="image" type="file" accept="image/png, image/jpeg">
+        </div>
         <input type="submit" value="Submit">
     </form>
 

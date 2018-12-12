@@ -12,10 +12,21 @@ class UserService {
       console.log(e);
     }
   }
+
   async changeUsername(email, username) {
     try {
       return await this.knex("users")
         .update("username", username)
+        .where("email", email);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async changeProfilePicture(email, profilepic) {
+    try {
+      return await this.knex("users")
+        .update("profilepicture", profilepic)
         .where("email", email);
     } catch (e) {
       console.log(e);

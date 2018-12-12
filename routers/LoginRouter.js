@@ -52,10 +52,13 @@ module.exports = (express) => {
     res.sendFile(__dirname + '/signup.html');
   });
 
-  router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/',
-    failureRedirect: '/error'
-  }));
+  router.post(
+    "/signup",
+    passport.authenticate("local-signup", {
+      successRedirect: "/profile",
+      failureRedirect: "/error"
+    })
+  );
 
   router.get('/error', (req, res) => {
     res.send('You are not logged in!');

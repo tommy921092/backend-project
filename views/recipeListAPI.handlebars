@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/css/recipeList.css" />
+
+<body>
+    <section id="searchbar">
+        <h4>Search for your favourite food</h4>
+        <!-- link modify later -->
+        <form action="/search" method="get">
+            <input id="searchbox" type="text" name="name" value="">
+            <input type="submit" value="Search">
+        </form>
+    </section>
+    <!-- navigation holder -->
+    <div class="holder">
+    </div>
+
+    <!-- item container -->
+    <div id="itemContainer" >
+    <ul id="clearfix" class="items">
+        {{#each obj}}
+            <li style="display: inline-block;">
+                <div id="settingcard">
+                    <img src=https://spoonacular.com/recipeImages/{{image}} alt="image">
+                    <div class="context">
+                        <p class="title"><span>{{title}}</span></p>
+                        <p class="time">Cooking Time: <span>{{readyInMinutes}}</span><span> mins</span></p>
+                        <a class="learnmore" href="/searchByAPI/recipe?id={{id}}">Learn More</a>
+                    </div>
+            </li>
+        {{/each}}
+    </ul>
+    </div>
+</body>
+
+<script type="text/javascript">
+    $("div.holder").jPages({
+        containerID: "clearfix",
+        perPage: 4,
+        startPage: 1,
+        startRange: 5,
+        midRange: 5,
+        endRange: 5
+    });
+</script>
