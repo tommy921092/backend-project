@@ -49,7 +49,7 @@ app.use(function (req, res, next) {
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", LoginRouter);
-app.use("/", new UserRouter(userService).router());
+app.use("/", new UserRouter(userService,recipeService).router());
 //should add isLoggedIn to ensure services only are accessible to users
 app.use("/", new RecipeAPIRouter(recipeAPIService, recipeService).router());
 app.use("/", new RecipeRouter(recipeService).router());

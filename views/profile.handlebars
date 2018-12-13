@@ -8,13 +8,13 @@
                 <h4>Your Profile</h4>
                 <div class="flexbox">
                     <div id="userphoto">
-                        <img src={{profilepic}}>
+                        <img src={{profileInfo.profilepic}}>
                     </div>
 
                     <div id="setting">
                         <div class="userinfo">
-                            <h5>Username: {{name}}</h5>
-                            <h5>Email: {{email}}</h5>
+                            <h5>Username: {{profileInfo.name}}</h5>
+                            <h5>Email: {{profileInfo.email}}</h5>
                         </div>
                         <!-- Modal for setting-->
                         <div id="photoupload">
@@ -33,9 +33,9 @@
                                             <form action="/image-upload" enctype='multipart/form-data' method="post" id="photoupload">
                                                 <div>
                                                     <input id="image" name="image" type="file" accept="image/png, image/jpeg">
-                                                <input type="submit" value="Photo Submit">
+                                                    <input type="submit" value="Photo Submit">
                                                 </div>
-                            
+
                                             </form>
 
                                             <form action="/profile" method="post">
@@ -71,21 +71,40 @@
                 <a href="/upload">UPLOAD RECIPE</a>
             </div>
             
+            <div class="holder"></div>
             <div id="searchbody">
-                <div id="itemContainer" style="background-color: white;">
+                <div id="itemContainer">
                     <ul id="clearfix" class="items">
-                        {{#each obj}}
+                        {{#each data}}
                         <li style="display: inline-block;">
                             <div id="settingcard">
-                                <img src=https://spoonacular.com/recipeImages/{{image}} alt="image">
+                                <img src={{imageurl}} alt="image">
                                 <div class="context">
-                                    <p class="title"><span>{{title}}</span></p>
-                                    <p class="time">Cooking Time: <span>{{readyInMinutes}}</span><span> mins</span></p>
-                                    <a class="learnmore" href="/searchByAPI/recipe?id={{id}}">Learn More</a>
+                                    <p class="title"><span>{{recipe_name}}</span></p>
+
+                                    {{#if username}}
+                                    <p class="users">Created by: <span>{{username}}</span></p>
+                                    {{else}}
+                                    <p class="users">Created by: <span> --- </span></p>
+                                    {{/if}}
+
+                                    {{#if tags}}
+                                    <p class="tags">Tags: <span>{{tags}}</span></p>
+                                    {{else}}
+                                    <p class="tags">Tags: <span> --- </span></p>
+                                    {{/if}}
+
+                                    {{#if time_taken}}
+                                    <p class="time">Cooking Time: <span>{{time_taken}} mins</span></p>
+                                    {{else}}
+                                    <p class="time">Cooking Time: <span> --- </span></p>
+                                    {{/if}}
+                                    <a class="learnmore" href="/search/recipe?id={{recipeID}}">Learn More</a>
                                 </div>
                         </li>
                         {{/each}}
                     </ul>
+                    
                 </div>
             </div>
         </div>
@@ -138,3 +157,14 @@
 
 
 </body>
+
+<script type="text/javascript">
+    $("div.holder").jPages({
+        containerID: "clearfix",
+        perPage: 4,
+        startPage: 1,
+        startRange: 5,
+        midRange: 5,
+        endRange: 5
+    });
+</script>

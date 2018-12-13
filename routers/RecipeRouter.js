@@ -34,10 +34,12 @@ class RecipeRouter {
         });
       }
     });
-    //get saved recipes
-    // router.get("/save", (req, res) => {
-    //   return this.recipeService.listBySave(req.query.id);
-    // });
+    //list All
+    router.get("/listAllfromDB", (req, res) => {
+      this.recipeService.listAll().then(data => {
+        res.render("recipeList", { data });
+      });
+    });
     //add recipe
     router.post("/addRecipe", (req, res) => {
       singleUpload(req, res, (err, some) => {
@@ -56,7 +58,7 @@ class RecipeRouter {
           req.file.location
         );
       });
-      res.redirect('/upload')
+      res.redirect("/upload");
     });
     //add comment
     router.post("/comment", (req, res) => {
@@ -71,10 +73,11 @@ class RecipeRouter {
       return this.recipeService.rate(req.body.rate);
     });
 
-    router.post("/saveRecipe", (req, res) => {
-      //to be finished
-      // return this.recipeService.save(recipeID, req.user.username);
-    });
+    // router.post("/saveRecipe", (req, res) => {
+    //   //to be finished
+    //   this.recipeService.save(req.body,id, req.user.username); cannot get the req.body.id.....gg
+    //   res.redirect('/');
+    // });
 
     router.post("/imakeit", (req, res) => {
       // return this.recipeService.

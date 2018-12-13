@@ -3,8 +3,9 @@ const upload = require("../multer");
 const singleUpload = upload.single("image"); // 'image' key
 
 class UserRouter {
-  constructor(UserService) {
+  constructor(UserService,recipeService) {
     this.UserService = UserService;
+    this.recipeService = recipeService;
   }
   router() {
     const router = express.Router();
@@ -19,25 +20,44 @@ class UserRouter {
     }
 
     // generate profile page
-    router.get("/profile", isLoggedIn, (req, res) => { // this endpoint will execute the profile rendering
+    router.get("/profile", isLoggedIn, (req, res) => {
+      // this endpoint will execute the profile rendering
       console.log(req.user.id);
 
-      this.UserService.getProfile(req.user.id).then(function (result) {
-        console.log('user result:', result[0].username);
-
-        res.render("profile", {
-          name: result[0].username,
-          email: result[0].email,
-          profilepic: () => {
-            // logic to check if user has a profile picture
-            if (result[0].profilepicture) {
-              return result[0].profilepicture;
-            } else {
-              return "../assets/profile-stock.jpg"
+      this.UserService.getProfile(req.user.id)
+        .then(function(result) {
+          // console.log("user result:", result[0].username);
+          let profileInfo = {
+            name: result[0].username,
+            email: result[0].email,
+            profilepic: () => {
+              // logic to check if user has a profile picture
+              if (result[0].profilepicture) {
+                return result[0].profilepicture;
+              } else {
+                return "../assets/profile-stock.jpg";
+              }
             }
-          }
+          };
+          return profileInfo;
+          // res.render("profile", {
+          //   name: result[0].username,
+          //   email: result[0].email,
+          //   profilepic: () => {
+          //     // logic to check if user has a profile picture
+          //     if (result[0].profilepicture) {
+          //       return result[0].profilepicture;
+          //     } else {
+          //       return "../assets/profile-stock.jpg";
+          //     }
+          //   }
+          // });
+        })
+        .then(profileInfo => {
+          this.recipeService.listBySave(req.user.username).then(data => {
+            res.render("profile", { profileInfo, data });
+          });
         });
-      });
     });
 
     router.post("/changePW", (req, res) => {
@@ -47,8 +67,8 @@ class UserRouter {
     // Change Username
     router.post("/profile", (req, res) => {
       this.UserService.changeUsername(req.user.email, req.body.username);
-      console.log('user req:', req.user.username)
-      res.redirect('/profile'); // get /profile will be executed
+      console.log("user req:", req.user.username);
+      res.redirect("/profile"); // get /profile will be executed
     });
 
     // Image uploader
@@ -68,10 +88,17 @@ class UserRouter {
         }
         console.log("S3 bucket url:", req.file.location);
         // insert the req.file.location to our knex table
-        this.UserService.changeProfilePicture(req.user.email, req.file.location);
-        res.redirect('/profile');
-      })
-    })
+        this.UserService.changeProfilePicture(
+          req.user.email,
+          req.file.location
+        );
+        res.redirect("/profile");
+      });
+    });
+
+    router.get("/upload", (req, res) => {
+      res.render("uploadform");
+    });
 
     router.get('/upload', (req, res) => {
       res.render('uploadform')

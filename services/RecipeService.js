@@ -23,6 +23,27 @@ class RecipeService {
       console.log(e);
     }
   }
+
+  async listAll() {
+    try {
+      let query = await this.knex("recipes") //return all recipes
+        .select(
+          "recipes.id",
+          "recipes.recipe_name",
+          "recipes.imageurl",
+          "users.username",
+          "recipes.time_taken",
+          this.knex.raw("ARRAY_AGG(tags.tagname) as tags")
+        )
+        .fullOuterJoin("users", "recipes.user_id", "users.id")
+        .fullOuterJoin("recipes_tags", "recipes.id", "recipes_tags.recipe_id")
+        .fullOuterJoin("tags", "recipes_tags.tag_id", "tags.id")
+        .groupBy("recipes.id", "users.username");
+        return query;
+    } catch (e) {
+      console.log(e);
+    }
+  }
   async listByTags(tags) {
     // localhost:3000/search?tags=apple%2Csugar
     //tested
@@ -94,6 +115,7 @@ class RecipeService {
       }
       let query = await this.knex("recipes")
         .select(
+          "recipes.id",
           "recipes.recipe_name",
           "recipes.imageurl",
           "users.username",
@@ -112,6 +134,7 @@ class RecipeService {
         .innerJoin("measures", "recipes_ingredients.measure_id", "measures.id")
         .where("recipes_ingredients.recipe_id", recipeID);
       // console.log(query2);
+      console.log("query", query.id);
       return { basicInfo: query, ingredientInfo: query2 };
     } catch (e) {
       console.log(e);
@@ -163,14 +186,17 @@ class RecipeService {
     try {
       return await this.knex("recipes")
         .select(
-          "recipes.id",
+          "recipes.id as recipeID",
           "recipes.recipe_name",
-          "recipes.description",
+          "recipes.imageurl",
           "users.username",
-          "recipes.time_taken"
+          "recipes.time_taken",
+          this.knex.raw("ARRAY_AGG(tags.tagname) as tags")
         )
-        .fullOuterJoin("users_recipes", "users_recipes.recipe_id", "recipes.id")
-        .fullOuterJoin("users", "users.id", "users_recipes.user_id")
+        .fullOuterJoin("users", "recipes.user_id", "users.id")
+        .fullOuterJoin("recipes_tags", "recipes_tags.recipe_id", "recipes.id")
+        .fullOuterJoin("tags", "recipes_tags.tag_id", "tags.id")
+        .groupBy("recipes.id", "users.username")
         .where("users.username", user);
     } catch (e) {
       console.log(e);
@@ -192,14 +218,16 @@ class RecipeService {
         .where("users.username", user)
         .first();
       //insert basicInfo
-      let query2 = await this.knex("recipes").insert({
-        recipe_name: content.title,
-        user_id: query.id,
-        imageurl: imageurl,
-        instructions: content.instructions,
-        time_taken: Number(content.time_taken)
-      }).returning('id')
-      console.log('q2',query2[0])
+      let query2 = await this.knex("recipes")
+        .insert({
+          recipe_name: content.title,
+          user_id: query.id,
+          imageurl: imageurl,
+          instructions: content.instructions,
+          time_taken: Number(content.time_taken)
+        })
+        .returning("id");
+      console.log("q2", query2[0]);
       //for each ingredient element
       for (let i in content.ingredient) {
         //search for existing ingredients table to see if the element input exist in current table

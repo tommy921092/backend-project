@@ -44,7 +44,7 @@ nav{
 
 /* search */
 #searchbar{
-    margin: 50px;
+    margin: 40px 40px;
 }
 
 #searchbar h4{
@@ -259,3 +259,42 @@ nav{
 	.footer-bs .footer-nav { border-left:solid 1px rgba(255,255,255,0.10); }
 }
 
+#alldb {
+    display: flex;
+    justify-content: center;
+}
+
+#alldb button{
+    border: 1px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    background: none;
+    background-color: #ffcc00;
+}
+
+#alldb button:hover{
+    background-color: #ffe066;
+}
+
+#alldb a{
+    color: white;
+    margin-top: 10px;
+}
+
+@media only screen and (max-width:768px){
+    #searchbox {
+        width:100%;
+        margin-bottom: 10px;
+    }
+
+    #searchtools{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:400px){
+    #search-type , #DB-API{
+        margin-left: 0;
+    }
+}

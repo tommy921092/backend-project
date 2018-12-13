@@ -17,7 +17,7 @@
 
 <section id="uploadform">
     <div id="background">
-        <form action="/addRecipe" method="POST" enctype="multipart/form-data">
+        <form action="/" method="POST" enctype="multipart/form-data">
             <div id="title">
                 <input type="text" name="title" placeholder="e.g Apple Pie">
             </div>
@@ -36,9 +36,10 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
+                                    {{!-- something need to add --}}
                                     <form action="/sth" enctype='multipart/form-data' method="post" id="recipephoto"></form>
                                     <div>
-                                        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                                        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onchange='previewFile()'>
                                         <input type="submit" value="Photo Submit">
                                     </div>
                                     <div class="modal-footer">
@@ -144,8 +145,30 @@
     </div>
 </section>
 
-<script type='text/javascript'>
-    $(document).ready(function(){
+<script>
+    var uploadPhoto = document.getElementById("avatar");
+
+    uploadPhoto.onchange = function () {
+        if (this.files[0].size > 2000000) {
+            alert("Image is too big! Please upload file less than 2MB");
+            this.value = "";
+        };
+    };
+    function previewFile() {
+        var preview = document.querySelector('img');
+        var file = document.querySelector('input#avatar').files[0];
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            preview.src = reader.result;
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+     $(document).ready(function(){
         $('#adding-ing').on("click",function(){
             let userTemplate = $('#fuckingtemplate').clone();
 
