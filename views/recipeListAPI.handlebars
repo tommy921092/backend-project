@@ -7,20 +7,26 @@
     </div>
 
     <!-- item container -->
-    <div id="itemContainer">
-        <ul id="clearfix" class="items">
-            {{#each obj}}
-            <li style="display: inline-block;">
-                <div id="settingcard">
-                    <img src=https://spoonacular.com/recipeImages/{{image}} alt="image">
-                    <div class="context">
-                        <p class="title"><span>{{title}}</span></p>
-                        <p class="time">Cooking Time: <span>{{readyInMinutes}} mins</span><span> mins</span></p>
-                        <a class="learnmore" href="/searchByAPI/recipe?id={{id}}">Learn More</a>
-                    </div>
-            </li>
-            {{/each}}
-        </ul>
+    <div id="setcoloronly">
+        <div id="itemContainer">
+            <ul id="clearfix" class="items">
+                {{#each obj}}
+                <li style="display: inline-block;">
+                    <div id="settingcard">
+                        <img src=https://spoonacular.com/recipeImages/{{image}} alt="image">
+                        <div class="context">
+                            <p class="title"><span>{{title}}</span></p>
+                            {{#if readyInMinutes}}
+                            <p class="time">Cooking Time: <span>{{readyInMinutes}} </span><span> mins</span></p>
+                            {{else}}
+                            <p class="time">Cooking Time: <span> --- </span></p>
+                            {{/if}}
+                            <a class="learnmore" href="/searchByAPI/recipe?id={{id}}">Learn More</a>
+                        </div>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
     </div>
 </body>
 
