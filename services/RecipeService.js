@@ -10,27 +10,29 @@ class RecipeService {
           "recipes.recipe_name",
           "recipes.imageurl",
           "users.username",
-          "recipes.time_taken"
+          "recipes.time_taken",
+          this.knex.raw("ARRAY_AGG(tags.tagname) as tags")
         )
         .fullOuterJoin("users", "recipes.user_id", "users.id")
-        .whereRaw(`LOWER(recipes.recipe_name) LIKE ?`, [`%${keyword}%`]);//for case-insensitive
-      console.log(query);
+        .fullOuterJoin("recipes_tags", "recipes.id", "recipes_tags.recipe_id")
+        .fullOuterJoin("tags", "recipes_tags.tag_id", "tags.id")
+        .whereRaw(`LOWER(recipes.recipe_name) LIKE ?`, [`%${keyword}%`]) //for case-insensitive
+        .groupBy("recipes.id", "users.username");
       return query;
     } catch (e) {
       console.log(e);
     }
   }
   async listByTags(tags) {
+    // localhost:3000/search?tags=apple%2Csugar
     //tested
     try {
-      let Arr = tags.split(",");
-      console.log(Arr);
+      let Arr = decodeURIComponent(tags).split(",");
       let query = await this.knex("recipes")
         .select(
           "recipes.id as recipeID",
           "recipes.recipe_name",
           "recipes.imageurl",
-          "recipes.description",
           "users.username",
           "recipes.time_taken",
           this.knex.raw("ARRAY_AGG(tags.tagname) as tags")
@@ -39,8 +41,39 @@ class RecipeService {
         .fullOuterJoin("recipes_tags", "recipes_tags.recipe_id", "recipes.id")
         .fullOuterJoin("tags", "recipes_tags.tag_id", "tags.id")
         .whereIn("tags.tagname", Arr)
-        .groupBy("recipes.id", "users.username"); //{...tags: ['dessert','vegan']}
-      console.log(query);
+        .groupBy("recipes.id", "users.username");
+      return query;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async listByIngredients(Ingredients) {
+    // localhost:3000/search?Ingredients=apple%2Csugar
+    //tested
+    try {
+      let Arr = decodeURIComponent(Ingredients).split(",");
+      let query = await this.knex("recipes")
+        .select(
+          "recipes.id as recipeID",
+          "recipes.recipe_name",
+          "recipes.imageurl",
+          "users.username",
+          "recipes.time_taken",
+          this.knex.raw("ARRAY_AGG(ingredients.ingredient_name) as Ingredients")
+        )
+        .fullOuterJoin("users", "recipes.user_id", "users.id")
+        .fullOuterJoin(
+          "recipes_ingredients",
+          "recipes_ingredients.recipe_id",
+          "recipes.id"
+        )
+        .fullOuterJoin(
+          "ingredients",
+          "recipes_ingredients.ingredient_id",
+          "ingredients.id"
+        )
+        .whereIn("ingredients.ingredient_name", Arr)
+        .groupBy("recipes.id", "users.username");
       return query;
     } catch (e) {
       console.log(e);
@@ -50,9 +83,36 @@ class RecipeService {
   async showDetails(recipeID) {
     //tested
     try {
-      let query = await this.knex("recipes").where("recipes.id", recipeID);
-      console.log(query);
-      return query;
+      let lastID;
+      if (recipeID == "API") {
+        recipeID = await this.knex("recipes")
+          .select("id")
+          .orderBy("id", "desc")
+          .first();
+        lastID = recipeID.id;
+        recipeID = lastID;
+      }
+      let query = await this.knex("recipes")
+        .select(
+          "recipes.recipe_name",
+          "recipes.imageurl",
+          "users.username",
+          "recipes.time_taken",
+          "recipes.instructions"
+        )
+        .fullOuterJoin("users", "users.id", "recipes.user_id")
+        .where("recipes.id", recipeID)
+        .first();
+      let query2 = await this.knex("recipes_ingredients") //return ingredient_name, measure_name and amount
+        .innerJoin(
+          "ingredients",
+          "recipes_ingredients.ingredient_id",
+          "ingredients.id"
+        )
+        .innerJoin("measures", "recipes_ingredients.measure_id", "measures.id")
+        .where("recipes_ingredients.recipe_id", recipeID);
+      // console.log(query2);
+      return { basicInfo: query, ingredientInfo: query2 };
     } catch (e) {
       console.log(e);
     }
@@ -123,18 +183,14 @@ class RecipeService {
         .select("id")
         .where("users.username", user)
         .first();
-      await this.knex("recipes")
+      let query = await this.knex("recipes")
         .insert({
           recipe_name: content.name,
           user_id: query.id,
           imageurl: imageurl,
-          description: content.description,
           instructions: content.instructions,
           time_taken: content.time_taken,
-          rating: content.rating,
-          imakeit: content.imakeit
-        })
-        .where("recipes.user_id", query.id);
+        }).returning('id')
     } catch (e) {
       console.log(e);
     }
@@ -148,7 +204,6 @@ class RecipeService {
         .fullOuterJoin("recipes", "comments.recipe_id", "recipes.id")
         .fullOuterJoin("users", "comments.user_id", "users.id")
         .where("recipes.id", recipeID);
-      console.log(query);
       return query;
     } catch (e) {
       console.log(e);

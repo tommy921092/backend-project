@@ -1,32 +1,39 @@
-<link rel="stylesheet" href="/css/searchpage.css" />
+<link rel="stylesheet" href="/css/recipeList.css">
 
-<section id="searchbar">
-    <h4>Search for your favourite food</h4>
-    <!-- link modify later -->
-    <form action="/search" method="get">
-        <input id="searchbox" type="text" name="name" value="">
-        <input type="submit" value="Search">
-    </form>
-</section>
-
-<section id="searchresult">
-    <div id="searchbody">
-        <div class="row">
-            <div class="everycard col-md-4 col-sm-12 col-12">
-                <div class="card">
-                    <img class="card-img-top" src="/assets/001.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h6 class="card-title">Food Title</h6>
-                        <p class="card-text">Description</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Rating</li>
-                        <li class="list-group-item">Tag</li>
-                        <li class="list-group-item">Cooking Time</li>
-                    </ul>
-                    <a href="/front-end/recipe.html" class="btn btn-primary">Learn More</a>
-                </div>
-            </div>
-        </div>
+<body style="background-color:#00334d;">
+    {{>searchbar}}
+    <!-- navigation holder -->
+    <div class="holder">
     </div>
-</section>
+
+    <!-- item container -->
+    <div id="itemContainer">
+        <p>{{data.length}} matching results for {{req.body}}</p>
+        <ul id="clearfix" class="items">
+            {{#each data}}
+            <li style="display: inline-block;">
+                <div id="settingcard">
+                    <img src={{imageurl}} alt="image">
+                    <div class="context">
+                        <p class="title"><span>{{recipe_name}}</span></p>
+                        <p class="users">Created by: <span>{{username}}</span></p>
+                        <p class="tags">Tags: <span>{{tags}}</span></p>
+                        <p class="time">Cooking Time: <span>{{time_taken}} mins</span></p>
+                        <a class="learnmore" href="/search/recipe?id={{id}}">Learn More</a>
+                    </div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</body>
+
+<script type="text/javascript">
+    $("div.holder").jPages({
+        containerID: "clearfix",
+        perPage: 4,
+        startPage: 1,
+        startRange: 5,
+        midRange: 5,
+        endRange: 5
+    });
+</script>

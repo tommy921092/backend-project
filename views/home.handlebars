@@ -1,14 +1,8 @@
 <link rel="stylesheet" href="/css/app.css" />
 
-<body style="background-color:#001a1a; height:100%;">
-    <section id="searchbar">
-        <h4>Search for your favourite food</h4>
-        <form action="/search" method="get">
-            <input id="searchbox" type="text" name="name" >
-            <input type="submit" value="Search">
-        </form>
-    </section>
-
+<body style="background-color:#80d4ff; height:100%;">
+    {{>searchbar}}
+    
     <section id="slideshow">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">

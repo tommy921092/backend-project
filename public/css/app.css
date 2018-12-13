@@ -33,6 +33,7 @@ nav{
 }
 
 #searchbar input[type="submit"]{
+    margin-left: 10px;
     border: 1px solid #803300;
     background-color: #803300;
     border-radius: 5px;
@@ -48,6 +49,35 @@ nav{
 #searchbox{
     width: 50%;
 }
+
+#search-type{
+    color:white;
+    border: 1px solid white;
+    background:none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#DB-API{
+    color:white;
+    border: 1px solid white;
+    background:none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+
+@media only screen and (max-width:650px){
+    #searchtools{
+        display: block;
+        margin-top: 10px;
+    }
+
+    #searchbar input[type="submit"]{
+        margin-top: 10px;
+    }
+} 
+
 
 /* slideshows */
 
@@ -118,7 +148,7 @@ nav{
     justify-content: center;
     width:100%;
     padding-bottom:20px;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 #slideshow .img{
@@ -170,7 +200,7 @@ nav{
 
 /* footer */
 .footer-bs {
-    background-color: #3c3d41;
+    background-color: #737373;
 	padding: 40px 40px;
 	color: rgba(255,255,255,1.00);
 	/* margin-bottom: 20px; */

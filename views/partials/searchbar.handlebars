@@ -1,0 +1,31 @@
+<section id="searchbar">
+    <h4>Search for your favourite food</h4>
+    <form action="/search" method="get">
+        <input id="searchbox" type="text" name="name" value="" data-role="tagsinput">
+        <span id="searchtools">
+            <select id="search-type">
+                <option value="name">name</option>
+                <option value="ingd">ingredient</option>
+                <option value="tags">tag</option>
+            </select>
+            <select id="DB-API">
+                <option value="/search">DB</option>
+                <option value="/searchByAPI">API</option>
+            </select>
+            <input type="submit" value="Search">
+        </span>
+    </form>
+</section>
+
+<script>
+    $(document).ready(function () {
+        $('#search-type').change(function () {
+            $('#searchbox').attr('name', $(this).val())
+        })
+        $('#DB-API').change(function () {
+            $('form').attr('action', $(this).val())
+            console.log($('form').attr('action'))
+        })
+    });
+
+</script>

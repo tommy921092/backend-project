@@ -2,10 +2,17 @@
 
 <section id="uploadform">
     <div id="background">
-        <form action="/sth" method="POST">
+        {{!-- <form action="/profile" method="post">
+            <div>
+                <label>Username:</label>
+                <input id="username" name="username" type="text" placeholder="Choose wisely">
+            </div>
+            <input type="submit" value="Submit">
+        </form> --}}
+        <form action="/addRecipe" method="POST">
 
             <div id="title">
-                <input type="text" name="title" value="Food Title">
+                <input type="text" name="title">
             </div>
 
             <div id="adjustment">
@@ -23,94 +30,51 @@
                 </div>
             </div>
 
-            <div id="description">
-                <p>Description:</p>
-                <textarea name="message"></textarea>
-                <br>
-            </div>
-
             <div id="ingredient">
                 <p>Ingredient:</p>
                 <div id="inline-block">
-                    <div id="quantity">
-                        <textarea name="ingredient"></textarea>
-                        <select>
-                            <option value="1">x1</option>
-                            <option value="2">x2</option>
-                            <option value="3">x3</option>
-                            <option value="4">x4</option>
-                            <option value="4">x5</option>
-                            <option value="4">x6</option>
-                            <option value="4">x7</option>
-                        </select>
-                    </div>
-                    <div id="quantity">
-                        <textarea name="ingredient"></textarea>
-                        <select>
-                            <option value="1">x1</option>
-                            <option value="2">x2</option>
-                            <option value="3">x3</option>
-                            <option value="4">x4</option>
-                            <option value="4">x5</option>
-                            <option value="4">x6</option>
-                            <option value="4">x7</option>
-                        </select>
-                    </div>
-                    <div id="quantity">
-                        <textarea name="ingredient"></textarea>
-                        <select>
-                            <option value="1">x1</option>
-                            <option value="2">x2</option>
-                            <option value="3">x3</option>
-                            <option value="4">x4</option>
-                            <option value="4">x5</option>
-                            <option value="4">x6</option>
-                            <option value="4">x7</option>
-                        </select>
+                    <div id="unit">
+                        <textarea name="ingredient[]"></textarea>
+                        <input type="number" name="amount[]">
+                        <input type="text" name="measure[]">
                     </div>
                     <button id="btn"><i class="fas fa-plus-circle"></i></button>
                 </div>
             </div>
 
-            <div id="direction">
-                <p>Direction:</p>
-                <textarea name="direction"></textarea>
-                <br>
-                <textarea name="direction"></textarea>
-                <br>
-                <textarea name="direction"></textarea>
-                <br>
-                <button id="btn"><i class="fas fa-plus-circle"></i></button>
+            <div id="instructions">
+                <p>Instructions:</p>
+                <textarea name="instructions"></textarea>
             </div>
 
             <div id="time">
                 <p>Total Cooking Time:</p>
                 <div id="verticalcenter">
-                    <textarea name="time"></textarea>
+                    <textarea name="time_taken"></textarea>
                     <span>mins</span>
                 </div>
             </div>
 
             <div id="type">
-                <p>Food Type:</p>
-                <input type="checkbox" name="vegetable" value="vegetable">
-                <label for="vegetable">Vegetable</label>
-                <!-- <input type="checkbox" name="beef" value="beef">
-                    <label for="beef">Beef</label>
-                    <input type="checkbox" name="fish" value="fish">
-                    <label for="fish">Fish</label>
-                    <input type="checkbox" name="shrimp" value="shrimp">
-                    <label for="shrimp">Shrimp</label> -->
-                <input type="checkbox" name="meat" value="meat">
-                <label for="meat">Meat</label>
-                <!-- <input type="checkbox" name="chicken" value="chicken">
-                    <label for="chicken">Chicken</label> -->
-                <input type="checkbox" name="egg" value="egg">
-                <label for="egg">Egg</label>
-                <input type="checkbox" name="pork" value="pork">
-                <label for="pork">Pork</label>
-                <input type="checkbox" name="pork" value="">
-                <label for="pork">Other</label>
+                <p>Tag:</p>
+                <input type="checkbox" name="tag" value="dessert">
+                <label for="dessert">Dessert</label>
+                <input type="checkbox" name="tag" value="lunch">
+                <label for="lunch">Lunch</label>
+                <input type="checkbox" name="tag" value="bread">
+                <label for="bread">Bread</label>
+                <input type="checkbox" name="tag" value="soup">
+                <label for="soup">Soup</label>
+                <input type="checkbox" name="tag" value="morning meal">
+                <label for="morning meal">Morning meal</label>
+                <input type="checkbox" name="tag" value="sause">
+                <label for="sause">Sause</label>
+                <input type="checkbox" name="tag" value="fingerood">
+                <label for="fingerood">Fingerood</label>
+                <input type="checkbox" name="tag" value="beverage">
+                <label for="beverage">Beverage</label>
+                <input type="checkbox" name="tag" value="side dish">
+                <label for="side dish">Side dish</label>
             </div>
 
             <input type="submit" value="Submit">

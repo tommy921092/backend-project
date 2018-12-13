@@ -1,5 +1,6 @@
 require("dotenv").config();
 const unirest = require("unirest");
+
 class RecipeAPIService {
   constructor(knex) {
     this.knex = knex;
@@ -86,12 +87,14 @@ class RecipeAPIService {
             result.body.title
           );
           if (query == "") {
-            await this.knex("recipes").insert({
-              recipe_name: result.body.title,
-              imageurl: result.body.image,
-              instructions: result.body.instructions,
-              time_taken: result.body.readyInMinutes
-            });
+            await this.knex("recipes")
+              .insert({
+                recipe_name: result.body.title,
+                imageurl: result.body.image,
+                instructions: result.body.instructions,
+                time_taken: result.body.readyInMinutes
+              })
+              .returning("id");
 
             let query2 = await this.knex("recipes")
               .where("recipe_name", result.body.title)
@@ -139,8 +142,6 @@ class RecipeAPIService {
             let query7 = await this.knex("tags").where({
               tagname: result.body.dishTypes[0]
             });
-            console.log(result.body.dishTypes[0]);
-            console.log("q7:", query7);
             if (query7 == "") {
               console.log("tag name not exist in table");
               await this.knex("tags").insert({
@@ -162,8 +163,6 @@ class RecipeAPIService {
         });
     });
   }
-
-  save(recipeID, user) {}
 }
 
 module.exports = RecipeAPIService;

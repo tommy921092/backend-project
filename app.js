@@ -29,7 +29,7 @@ const recipeService = new RecipeService(knex);
 const recipeAPIService = new RecipeAPIService(knex);
 const userService = new UserService(knex);
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
   session({
@@ -41,11 +41,17 @@ app.use(
 );
 setupPassport(app);
 
+// login/logout button
+app.use(function (req, res, next) {
+  res.locals.isAuthenticated = req.isAuthenticated();
+  next();
+});
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", LoginRouter);
 app.use("/", new UserRouter(userService).router());
 //should add isLoggedIn to ensure services only are accessible to users
-app.use("/", new RecipeAPIRouter(recipeAPIService).router());
+app.use("/", new RecipeAPIRouter(recipeAPIService, recipeService).router());
 app.use("/", new RecipeRouter(recipeService).router());
 app.get("/", (req, res) => {
   recipeAPIService.findRandomRecipe().then(data => {
@@ -54,6 +60,7 @@ app.get("/", (req, res) => {
     let idArr = data.recipes.map(ele => ele.id);
     res.render("home", { image: imageArr, title: titleArr, recipeID: idArr });
   });
+  // res.render('home');
 });
 // app.use("/api/recipes",isLoggedIn, new RecipeRouter(recipeService).router());
 https.createServer(options, app).listen(port);

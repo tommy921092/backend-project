@@ -1,28 +1,27 @@
 <link rel="stylesheet" href="/css/recipe.css" />
 
+<body>
 <section id="recipe">
     <div id="imagine" class="need-flex-start">
-        <img src="/assets/001.png">
+        <img src="{{data.basicInfo.imageurl}}">
     </div>
     <div id="blockone">
-        <h5>---Title---</h5>
+        <h5>{{data.basicInfo.recipe_name}}</h5>
+        {{#if data.baseInfo.username}}
+        <h6>Made by: {{data.basicInfo.username}}</h6>
+        {{else}}
+        <h6>Made by: ---- </h6>
+        {{/if}}
+        <h6>Time taken: {{data.basicInfo.time_taken}} mins</h6>
         <div class="row">
-            <div id="description" class="col-md-10">
-                <h6>Description:</h6>
-                <p>This is demo description.This is demo description.This is demo description.
-                    This is demo description.This is demo description.</p>
-                <p>This is demo description.This is demo description.This is demo description.
-                    This is demo description.This is demo description.</p>
-            </div>
-            <div id="rating" class="col-md-2 col-sm-12 com-12">
-                <div class="rating">
+            <div id="rating" class="col-md-12 col-sm-12 com-12">
+                <div class="star">
                     <span>☆</span>
                     <span>☆</span>
                     <span>☆</span>
                     <span>☆</span>
                     <span>☆</span>
                 </div>
-                <p>----tag------</p>
             </div>
         </div>
     </div>
@@ -32,24 +31,14 @@
             <div id="context" class="col-md-10 col-sm-12 com-12">
                 <div id="ingredient">
                     <h6>Ingredient:</h6>
-                    <p>This is demo ingredient x1</p>
-                    <p>This is demo ingredient x1</p>
-                    <p>This is demo ingredient x1</p>
-                    <p>This is demo ingredient x1</p>
-                    <p>This is demo ingredient x1</p>
-                    <p>This is demo ingredient x1</p>
-                    <p>This is demo ingredient x1</p>
-                    <p>This is demo ingredient x1</p>
-                    <p>This is demo ingredient x1</p>
-                    <p>This is demo ingredient x1</p>
+                    {{#each data.ingredientInfo}}
+                    <p>{{ingredient_name}} x {{amount}} {{measure_name}}</p>
+                    {{/each}}
                 </div>
 
                 <div id="direction">
                     <h6>Direction:</h6>
-                    <p>1. This is demo direction</p>
-                    <p>2. This is demo direction</p>
-                    <p>3. This is demo direction</p>
-                    <p>4. This is demo direction</p>
+                    <p>{{data.basicInfo.instructions}}</p>
                 </div>
             </div>
             <div id="buttom" class="col-md-2">
@@ -59,10 +48,10 @@
                 <form action="/sth" method="POST">
                     <input type="submit" value="Share">
                 </form>
-                <form action="/sth" method="POST">
+                <form action="/recipe" method="POST">
                     <input type="submit" value="Favourite">
                 </form>
-                <form action="/sth" method="POST">
+                <form action="/recipe" method="POST">
                     <input type="submit" value="I made it!">
                 </form>
             </div>
@@ -99,3 +88,4 @@
         </div>
     </div>
 </section>
+</body>
