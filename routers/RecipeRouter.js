@@ -73,7 +73,7 @@ class RecipeRouter {
       return this.recipeService.rate(req.body.rate);
     });
 
-    router.post("/search/recipe:id", (req, res) => {
+    router.post("/recipe", (req, res) => {
       console.log('save recipe with id', req.query.id);
       return this.recipeService.save(req.query.id, req.user.username);
     });

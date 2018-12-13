@@ -33,43 +33,11 @@
             <div id="ingredient">
                 <p>Ingredient:</p>
                 <div id="inline-block">
-                    <div id="quantity">
-                        <textarea name="ingredient"></textarea>
-                        <select name="amount">
-                            <option value="1">x1</option>
-                            <option value="2">x2</option>
-                            <option value="3">x3</option>
-                            <option value="4">x4</option>
-                            <option value="5">x5</option>
-                            <option value="6">x6</option>
-                            <option value="7">x7</option>
-                        </select>
+                    <div id="unit">
+                        <textarea name="ingredient[]"></textarea>
+                        <input type="number" name="amount[]">
+                        <input type="text" name="measure[]">
                     </div>
-                    <div id="quantity">
-                        <textarea name="ingredient"></textarea>
-                        <select name="amount">
-                            <option value="1">x1</option>
-                            <option value="2">x2</option>
-                            <option value="3">x3</option>
-                            <option value="4">x4</option>
-                            <option value="5">x5</option>
-                            <option value="6">x6</option>
-                            <option value="7">x7</option>
-                        </select>
-                    </div>
-                    <div id="quantity">
-                        <textarea name="ingredient"></textarea>
-                        <select name="amount">
-                            <option value="1">x1</option>
-                            <option value="2">x2</option>
-                            <option value="3">x3</option>
-                            <option value="4">x4</option>
-                            <option value="5">x5</option>
-                            <option value="6">x6</option>
-                            <option value="7">x7</option>
-                        </select>
-                    </div>
-
                     <button id="btn"><i class="fas fa-plus-circle"></i></button>
                 </div>
             </div>
@@ -108,7 +76,7 @@
                 <input type="checkbox" name="tag" value="side dish">
                 <label for="side dish">Side dish</label>
             </div>
-            
+
             <input type="submit" value="Submit">
         </form>
     </div>
