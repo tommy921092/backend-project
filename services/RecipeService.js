@@ -179,18 +179,90 @@ class RecipeService {
 
   async addRecipe(user, content, imageurl) {
     try {
+      console.log(content);
+      let amountArr = [];
+      let measureArr = [];
+      for (let i in content.amount) {
+        amountArr[i] = Number(content.amount[i]);
+        console.log(amountArr[i]);
+      }
+      //get the user id by username: req.user.username
       let query = await this.knex("users")
         .select("id")
         .where("users.username", user)
         .first();
-      let query = await this.knex("recipes")
-        .insert({
-          recipe_name: content.name,
-          user_id: query.id,
-          imageurl: imageurl,
-          instructions: content.instructions,
-          time_taken: content.time_taken,
-        }).returning('id')
+      //insert basicInfo
+      let query2 = await this.knex("recipes").insert({
+        recipe_name: content.title,
+        user_id: query.id,
+        imageurl: imageurl,
+        instructions: content.instructions,
+        time_taken: Number(content.time_taken)
+      }).returning('id')
+      console.log('q2',query2[0])
+      //for each ingredient element
+      for (let i in content.ingredient) {
+        //search for existing ingredients table to see if the element input exist in current table
+        let query3 = await this.knex("ingredients").where(
+          "ingredient_name",
+          content.ingredient[i]
+        );
+        if (query3 == "") {
+          //if the ingredient not exist in the table
+          //insert the ingredient name to the table
+          await this.knex("ingredients").insert({
+            ingredient_name: content.ingredient[i]
+          });
+        }
+        //search for existing measures table to see.....
+        let query4 = await this.knex("measures").where(
+          "measure_name",
+          content.measure[i]
+        );
+        if (query4 == "") {
+          //if the measure unit not exist in the table
+          //insert
+          await this.knex("measures").insert({
+            measure_name: content.measure[i]
+          });
+        }
+        //get the ingredient element id
+        let query5 = await this.knex("ingredients")
+          .select("id")
+          .where("ingredient_name", content.ingredient[i])
+          .first();
+        //get the measure element id
+        let query6 = await this.knex("measures")
+          .select("id")
+          .where("measure_name", content.measure[i])
+          .first();
+        //insert the ids and amount
+
+        await this.knex("recipes_ingredients").insert({
+          recipe_id: query2[0],
+          ingredient_id: query5.id,
+          measure_id: query6.id,
+          amount: amountArr[i]
+        });
+      }
+      for (let i in content.tag) {
+        let query7 = await this.knex("tags").where({
+          tagname: content.tag[i]
+        });
+        if (query7 == "") {
+          console.log("tag name not exist in table");
+          await this.knex("tags").insert({
+            tagname: content.tag[i]
+          });
+        }
+        let query8 = await this.knex("tags")
+          .where("tagname", content.tag[i])
+          .first();
+        await this.knex("recipes_tags").insert({
+          recipe_id: query2[0],
+          tag_id: query8.id
+        });
+      }
     } catch (e) {
       console.log(e);
     }

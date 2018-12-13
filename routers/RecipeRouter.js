@@ -1,6 +1,6 @@
 const express = require("express");
 const upload = require("../multer");
-const singleUpload = upload.single("image");
+const singleUpload = upload.single("avatar");
 class RecipeRouter {
   constructor(recipeService) {
     this.recipeService = recipeService;
@@ -28,12 +28,10 @@ class RecipeRouter {
         });
       }
       if (req.query.ingd) {
-        this.recipeService
-          .listByIngredients(req.query.ingd)
-          .then(data => {
-            console.log(data);
-            res.render("recipeList", { data });
-          });
+        this.recipeService.listByIngredients(req.query.ingd).then(data => {
+          console.log(data);
+          res.render("recipeList", { data });
+        });
       }
     });
     //get saved recipes
@@ -42,23 +40,23 @@ class RecipeRouter {
     // });
     //add recipe
     router.post("/addRecipe", (req, res) => {
-      // singleUpload(req, res, function(err, some) {
-      //   if (err) {
-      //     console.log(err);
-      //     return res.status(err.statusCode).send({
-      //       errors: [{ title: "Image Upload Error", detail: err.message }]
-      //     });
-      //   }
+      singleUpload(req, res, (err, some) => {
+        if (err) {
+          console.log(err);
+          return res.status(err.statusCode).send({
+            errors: [{ title: "Image Upload Error", detail: err.message }]
+          });
+        }
 
-      //   // insert the req.file.location to our knex table
-      //   console.log(req.file.location);
-      //   this.recipeService.addRecipe(
-      //     req.user.username,
-      //     req.body,
-      //     req.file.location
-      //   );
-      // });
-      console.log('upload', req.user.username);
+        // insert the req.file.location to our knex table
+        console.log(req.file.location);
+        this.recipeService.addRecipe(
+          req.user.username,
+          req.body,
+          req.file.location
+        );
+      });
+      res.redirect('/upload')
     });
     //add comment
     router.post("/comment", (req, res) => {
@@ -73,9 +71,9 @@ class RecipeRouter {
       return this.recipeService.rate(req.body.rate);
     });
 
-    router.post("/recipe", (req, res) => {
-      console.log('save recipe with id', req.query.id);
-      return this.recipeService.save(req.query.id, req.user.username);
+    router.post("/saveRecipe", (req, res) => {
+      //to be finished
+      // return this.recipeService.save(recipeID, req.user.username);
     });
 
     router.post("/imakeit", (req, res) => {
