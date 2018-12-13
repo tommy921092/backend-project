@@ -1,39 +1,36 @@
 <link rel="stylesheet" href="/css/recipeList.css">
-<link rel="stylesheet" href="/css/searchpage.css">
-<section id="searchbar">
-    <h4>Search for your favourite food in DATABASE</h4>
-    <!-- link modify later -->
-    <form action="/search" method="get">
-        <input id="searchbox" type="text" name="name" value="">
-        <input type="submit" value="Search">
-    </form>
-</section>
-<!-- navigation holder -->
-<div class="holder">
-</div>
 
-<!-- item container -->
-<section id="searchresult">
-    <div id="searchbody">
+<body style="background-color:#00334d;">
+    {{>searchbar}}
+    <!-- navigation holder -->
+    <div class="holder">
+    </div>
+
+    <!-- item container -->
+    <div id="itemContainer">
         <p>{{data.length}} matching results for {{req.body}}</p>
-        <ul id="itemContainer">
-            {{#each data }}
-            <li>
-                <img src={{imageurl}} alt="image">
-                <h6>{{recipe_name}}</h6>
-                <p>Created by: {{username}}</p>
-                <p>Cooking Time: {{time_taken}} mins</p>
-                <p>tag: {{tags}}</p>
-                <a class="learnmore" href="/search/recipe?id={{id}}">Learn More</a>
+        <ul id="clearfix" class="items">
+            {{#each data}}
+            <li style="display: inline-block;">
+                <div id="settingcard">
+                    <img src={{imageurl}} alt="image">
+                    <div class="context">
+                        <p class="title"><span>{{recipe_name}}</span></p>
+                        <p class="users">Created by: <span>{{username}}</span></p>
+                        <p class="tags">Tags: <span>{{tags}}</span></p>
+                        <p class="time">Cooking Time: <span>{{time_taken}} mins</span></p>
+                        <a class="learnmore" href="/search/recipe?id={{id}}">Learn More</a>
+                    </div>
             </li>
             {{/each}}
         </ul>
     </div>
-</section>
+</body>
+
 <script type="text/javascript">
     $("div.holder").jPages({
-        containerID: "itemContainer",
-        perPage: 3,
+        containerID: "clearfix",
+        perPage: 4,
         startPage: 1,
         startRange: 5,
         midRange: 5,

@@ -1,36 +1,33 @@
-<link rel="stylesheet" href="/css/recipeList.css">
-<link rel="stylesheet" href="/css/searchpage.css">
-<section id="searchbar">
-    <h4>Search for your favourite food by API service</h4>
-    <!-- link modify later -->
-    <form action="/search" method="get">
-        <input id="searchbox" type="text" name="name" value="">
-        <input type="submit" value="Search">
-    </form>
-</section>
-<!-- navigation holder -->
-<div class="holder">
-</div>
+<link rel="stylesheet" href="/css/recipeList.css" />
 
-<!-- item container -->
-<section id="searchresult">
-    <div id="searchbody">
-        <ul id="itemContainer">
+<body style="background-color:#00334d;">
+    {{>searchbar}}
+    <!-- navigation holder -->
+    <div class="holder">
+    </div>
+
+    <!-- item container -->
+    <div id="itemContainer">
+        <ul id="clearfix" class="items">
             {{#each obj}}
-            <li>
-                <img src=https://spoonacular.com/recipeImages/{{image}} alt="image">
-                <h6>{{title}}</h6>
-                <p>Cooking Time {{readInMinutes}}</p>
-                <a class="learnmore" href="/searchByAPI/recipe?id={{id}}">Learn More</a>
+            <li style="display: inline-block;">
+                <div id="settingcard">
+                    <img src=https://spoonacular.com/recipeImages/{{image}} alt="image">
+                    <div class="context">
+                        <p class="title"><span>{{title}}</span></p>
+                        <p class="time">Cooking Time: <span>{{readyInMinutes}} mins</span><span> mins</span></p>
+                        <a class="learnmore" href="/searchByAPI/recipe?id={{id}}">Learn More</a>
+                    </div>
             </li>
             {{/each}}
         </ul>
     </div>
-</section>
+</body>
+
 <script type="text/javascript">
     $("div.holder").jPages({
-        containerID: "itemContainer",
-        perPage: 3,
+        containerID: "clearfix",
+        perPage: 4,
         startPage: 1,
         startRange: 5,
         midRange: 5,

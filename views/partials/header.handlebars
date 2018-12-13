@@ -12,17 +12,20 @@
             <ul class="navbar-nav ml-auto">
                 {{#if isAuthenticated}}
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">LOGOUT</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/profile">PROFILE</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/upload">UPLOAD RECIPE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">LOGOUT</a>
+                </li>
+
                 {{else}}
                 <li>
                     <a class="nav-link" href='/login'>LOGIN</a>
                 </li>
                 {{/if}}
-
             </ul>
         </div>
     </nav>

@@ -1,20 +1,28 @@
-<form action="/signup" method="post">
-    <div>
-        <label>Email:</label>
-        <input type="email" name="username" placeholder="Input Email" required />
-    </div>
-    <div>
-        <label>Password:</label>
-        <input id="password" name="password" type="password" placeholder="Password" required />
-    </div>
-    <div>
-        <label>Confirm Password:</label>
-        <input id="confirm_password" type="password" placeholder="Confirm Password" required>
-    </div>
-    <div>
-        <input type="submit" value="Sign up" />
-    </div>
-</form>
+<link rel="stylesheet" href="/css/signup.css" />
+
+
+
+<div id="signform">
+    <form action="/signup" method="post">
+     <h3>Welcome to join us!</h3>
+     <h6>Please submit your information as below.</h6>
+        <div class="signinput">
+            <label>Email:</label>
+            <input type="email" name="username" placeholder="Email Input" required />
+        </div>
+        <div class="signinput">
+            <label>Password:</label>
+            <input id="password" name="password" type="password" placeholder="Password" required />
+        </div>
+        <div class="signinput">
+            <label>Confirm Password:</label>
+            <input id="confirm_password" type="password" placeholder="Confirm Password" required>
+        </div>
+        <div class="signsubmit">
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+</div>
 
 <script>
     var password = document.getElementById("password"),

@@ -1,3 +1,4 @@
+const path = require("path");
 //router.js
 const passport = require("passport");
 
@@ -34,9 +35,9 @@ module.exports = express => {
     }),
     (req, res) => {
       console.log("successfully reached callback URI");
-      res.redirect("/profile")
+      res.redirect("/profile");
     }
-  );
+  ); // /profile refers to get request from UserRouter.js
 
   router.get(
     "/auth/facebook",
