@@ -87,18 +87,15 @@ class RecipeAPIService {
             result.body.title
           );
           if (query == "") {
-            await this.knex("recipes")
+            let query2 = await this.knex("recipes")
               .insert({
                 recipe_name: result.body.title,
                 imageurl: result.body.image,
                 instructions: result.body.instructions,
                 time_taken: result.body.readyInMinutes
               })
-              .returning("id");
+              .returing("id");
 
-            let query2 = await this.knex("recipes")
-              .where("recipe_name", result.body.title)
-              .first();
             for (let i = 0; i < result.body.extendedIngredients.length; i++) {
               let query3 = await this.knex("ingredients").where(
                 "ingredient_name",
@@ -152,7 +149,7 @@ class RecipeAPIService {
               .where("tagname", result.body.dishTypes[0])
               .first();
             await this.knex("recipes_tags").insert({
-              recipe_id: query2.id,
+              recipe_id: query2[0],
               tag_id: query8.id
             });
           }
