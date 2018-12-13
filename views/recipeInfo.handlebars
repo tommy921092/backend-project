@@ -5,7 +5,7 @@
         <img src="{{data.basicInfo.imageurl}}">
     </div>
     <div id="blockone">
-        <input type="text" style="display: none" name="recipeId" value={{data.basicInfo.id}}>
+        {{!-- <input type="text" name="recipeId" value={{data.basicInfo.id}}> req.body.id not working for save recipe without form submission--}} 
         <h5>Recipe Name: {{data.basicInfo.recipe_name}}</h5>
         <h5>Made by: {{data.basicInfo.username}}</h5>
         <h5>Time taken: {{data.basicInfo.time_taken}}</h5>

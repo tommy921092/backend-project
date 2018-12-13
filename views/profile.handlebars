@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/profile.css"/>
+<link rel="stylesheet" href="/css/profile.css" />
 <link rel="stylesheet" href="/css/recipeList.css" />
 
 <body style="background: white;">
@@ -6,10 +6,10 @@
         <div id="userinfo">
             <div id="userbucket">
                 <h4>Your Profile</h4>
-                <img src={{profilepic}}>
+                <img src={{profileInfo.profilepic}}>
                 <div class="userinfo">
-                    <p>Username: {{name}}</p>
-                    <p>Email: {{email}}</p>
+                    <p>Username: {{profileInfo.name}}</p>
+                    <p>Email: {{profileInfo.email}}</p>
                 </div>
 
 
@@ -95,14 +95,16 @@
             <h4>My Favourite</h4>
             <div id="itemContainer" style="background-color: white">
                 <ul id="clearfix" class="items">
-                    {{#each obj}}
+                    {{#each data}}
                     <li style="display: inline-block;">
                         <div id="settingcard">
-                            <img src=https://spoonacular.com/recipeImages/{{image}} alt="image">
+                            <img src={{imageurl}} alt="image">
                             <div class="context">
-                                <p class="title"><span>{{title}}</span></p>
-                                <p class="time">Cooking Time: <span>{{readyInMinutes}}</span><span> mins</span></p>
-                                <a class="learnmore" href="/searchByAPI/recipe?id={{id}}">Learn More</a>
+                                <p class="title"><span>{{recipe_name}}</span></p>
+                                <p class="users">Created by: <span>{{username}}</span></p>
+                                <p class="tags">Tags: <span>{{tags}}</span></p>
+                                <p class="time">Cooking Time: <span>{{time_taken}}</span><span> mins</span></p>
+                                <a class="learnmore" href="/search/recipe?id={{recipeID}}">Learn More</a>
                             </div>
                     </li>
                     {{/each}}
@@ -138,8 +140,8 @@
     // File validation
     var uploadImage = document.getElementById("image");
 
-    uploadImage.onchange = function(e) { // when there is a change detected in this input field
-        
+    uploadImage.onchange = function (e) { // when there is a change detected in this input field
+
         e.preventDefault();
 
         var file = this.files[0];
