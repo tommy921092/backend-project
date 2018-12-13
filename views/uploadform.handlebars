@@ -9,7 +9,7 @@
             </div>
             <input type="submit" value="Submit">
         </form> --}}
-        <form action="/addRecipe" method="POST">
+        <form action="/addRecipe" method="POST" enctype="multipart/form-data">
 
             <div id="title">
                 <input type="text" name="title">
@@ -30,10 +30,15 @@
                 </div>
             </div>
 
-            <div id="ingredient">
+            <div id="ingredient-element">
                 <p>Ingredient:</p>
                 <div id="inline-block">
-                    <div id="unit">
+                    <div class="quantity">
+                        <textarea name="ingredient[]"></textarea>
+                        <input type="number" name="amount[]">
+                        <input type="text" name="measure[]">
+                    </div>
+                    <div class="quantity">
                         <textarea name="ingredient[]"></textarea>
                         <input type="number" name="amount[]">
                         <input type="text" name="measure[]">
@@ -55,7 +60,7 @@
                 </div>
             </div>
 
-            <div id="type">
+            <div id="tag-element">
                 <p>Tag:</p>
                 <input type="checkbox" name="tag" value="dessert">
                 <label for="dessert">Dessert</label>
