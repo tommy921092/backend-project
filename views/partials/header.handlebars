@@ -3,7 +3,7 @@
         <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         </div>
         <div class="mx-auto order-0">
-            <a class="navbar-brand mx-auto title" href="/">MadaFood</a>
+            <a class="navbar-brand mx-auto title changefontfortitle" href="/">MadaFood</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -12,13 +12,17 @@
             <ul class="navbar-nav ml-auto">
                 {{#if isAuthenticated}}
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile">PROFILE</a>
+                    <a class="nav-link changefontina" href="/">HOME</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link changefontina" href="/profile">PROFILE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/upload">UPLOAD RECIPE</a>
+                    <a class="nav-link changefontina" href="/upload">UPLOAD RECIPE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">LOGOUT</a>
+                    <a class="nav-link changefontina logout" href="/logout">LOGOUT</a>
                 </li>
 
                 {{else}}
