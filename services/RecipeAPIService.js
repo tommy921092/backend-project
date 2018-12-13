@@ -94,7 +94,7 @@ class RecipeAPIService {
                 instructions: result.body.instructions,
                 time_taken: result.body.readyInMinutes
               })
-              .returing("id");
+              .returning("id");
 
             for (let i = 0; i < result.body.extendedIngredients.length; i++) {
               let query3 = await this.knex("ingredients").where(

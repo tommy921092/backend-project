@@ -1,11 +1,6 @@
 const express = require("express");
 const upload = require("../multer");
-<<<<<<< HEAD
-const singleUpload = upload.single("image");
-
-=======
 const singleUpload = upload.single("avatar");
->>>>>>> 3e1df3fc19e54a90b39bd07c7e6996badac40b7c
 class RecipeRouter {
   constructor(recipeService) {
     this.recipeService = recipeService;
