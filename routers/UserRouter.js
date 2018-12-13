@@ -19,11 +19,11 @@ class UserRouter {
     }
 
     // generate profile page
-    router.get("/profile", isLoggedIn, (req, res) => {
+    router.get("/profile", isLoggedIn, (req, res) => { // this endpoint will execute the profile rendering
       console.log(req.user.id);
 
       this.UserService.getProfile(req.user.id).then(function (result) {
-        // console.log('user details:', result)
+        console.log('user result:', result[0].username);
 
         res.render("profile", {
           name: result[0].username,
@@ -38,8 +38,6 @@ class UserRouter {
           }
         });
       });
-
-      // res.sendFile(path.join(__dirname, '../public', '/profile.html'));
     });
 
     router.post("/changePW", (req, res) => {
@@ -48,24 +46,9 @@ class UserRouter {
 
     // Change Username
     router.post("/profile", (req, res) => {
+      this.UserService.changeUsername(req.user.email, req.body.username);
       console.log('user req:', req.user.username)
-      this.UserService.changeUsername(req.user.email, req.body.username).then(
-
-        this.UserService.getProfile(req.user.id).then(function (result) {
-          console.log('user result:', result[0].username)
-          res.render(('profile'), {
-            name: result[0].username,
-            email: result[0].email,
-            profilepic: () => {
-              // logic to check if user has a profile picture
-              if (result[0].profilepicture) {
-                return result[0].profilepicture;
-              } else {
-                return "../assets/profile-stock.jpg";
-              }
-            }
-          })
-        }));
+      res.redirect('/profile'); // get /profile will be executed
     });
 
     // Image uploader
@@ -85,23 +68,8 @@ class UserRouter {
         }
         console.log("S3 bucket url:", req.file.location);
         // insert the req.file.location to our knex table
-        this.UserService.changeProfilePicture(req.user.email, req.file.location).then(
-
-          this.UserService.getProfile(req.user.id).then(function (result) {
-            res.render(('profile'), {
-              name: result[0].username,
-              email: result[0].email,
-              profilepic: () => {
-                // logic to check if user has a profile picture
-                if (result[0].profilepicture) {
-                  return result[0].profilepicture;
-                } else {
-                  return "../assets/profile-stock.jpg";
-                }
-              }
-            })
-          })
-        );
+        this.UserService.changeProfilePicture(req.user.email, req.file.location);
+        res.redirect('/profile');
       })
     })
 
