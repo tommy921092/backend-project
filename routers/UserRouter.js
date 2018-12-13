@@ -14,7 +14,7 @@ class UserRouter {
       if (req.isAuthenticated()) {
         return next();
       }
-  
+
       res.redirect("/login");
     }
 
@@ -23,7 +23,7 @@ class UserRouter {
       console.log(req.user.id);
 
       this.UserService.getProfile(req.user.id).then(function (result) {
-        console.log('user details:', result)
+        // console.log('user details:', result)
 
         res.render(('profile'), {
           name: result[0].username,
@@ -49,23 +49,24 @@ class UserRouter {
 
     // Change Username
     router.post("/profile", (req, res) => {
-      this.UserService.changeUsername(req.user.email, req.body.username);
+      console.log('user details:', req.user.username)
+      this.UserService.changeUsername(req.user.email, req.body.username).then(
 
-      this.UserService.getProfile(req.user.id).then(function (result) {
-        console.log('user details:', result)
-        res.render(('profile'), {
-          name: result[0].username,
-          email: result[0].email,
-          profilepic: () => {
-            // logic to check if user has a profile picture
-            if (result[0].profilepicture) {
-              return result[0].profilepicture;
-            } else {
-              return "../assets/profile-stock.jpg";
+        this.UserService.getProfile(req.user.id).then(function (result) {
+          console.log('user details:', result[0].username)
+          res.render(('profile'), {
+            name: result[0].username,
+            email: result[0].email,
+            profilepic: () => {
+              // logic to check if user has a profile picture
+              if (result[0].profilepicture) {
+                return result[0].profilepicture;
+              } else {
+                return "../assets/profile-stock.jpg";
+              }
             }
-          }
-        })
-      });
+          })
+        }));
     });
 
     // Image uploader
@@ -80,24 +81,25 @@ class UserRouter {
             }]
           });
         }
-        console.log("S3 bucket url:", req.file.location); 
+        console.log("S3 bucket url:", req.file.location);
         // insert the req.file.location to our knex table
-        this.UserService.changeProfilePicture(req.user.email, req.file.location);
+        this.UserService.changeProfilePicture(req.user.email, req.file.location).then(
 
-        this.UserService.getProfile(req.user.id).then(function (result) {
-          res.render(('profile'), {
-            name: result[0].username,
-            email: result[0].email,
-            profilepic: () => {
-              // logic to check if user has a profile picture
-              if (result[0].profilepicture) {
-                return result[0].profilepicture;
-              } else {
-                return "../assets/profile-stock.jpg";
+          this.UserService.getProfile(req.user.id).then(function (result) {
+            res.render(('profile'), {
+              name: result[0].username,
+              email: result[0].email,
+              profilepic: () => {
+                // logic to check if user has a profile picture
+                if (result[0].profilepicture) {
+                  return result[0].profilepicture;
+                } else {
+                  return "../assets/profile-stock.jpg";
+                }
               }
-            }
+            })
           })
-        });
+        );
       })
     })
 
