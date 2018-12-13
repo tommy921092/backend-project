@@ -41,6 +41,12 @@ app.use(
 );
 setupPassport(app);
 
+// login/logout button
+app.use(function (req, res, next) {
+  res.locals.isAuthenticated = req.isAuthenticated();
+  next();
+});
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", LoginRouter);
 app.use("/", new UserRouter(userService).router());

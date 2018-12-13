@@ -132,8 +132,36 @@
             </div>
         </div>
     </div>
-    </section>
-
-
-
 </body>
+
+<script>
+    // File validation
+    var uploadImage = document.getElementById("image");
+
+    uploadImage.onchange = function(e) { // when there is a change detected in this input field
+        
+        e.preventDefault();
+
+        var file = this.files[0];
+        var img = new Image(); // create an image element with that selected file
+        img.src = window.URL.createObjectURL(file);
+
+        // as soon as the image has been loaded
+        img.onload = function () {
+            var width = img.naturalWidth,
+                height = img.naturalHeight;
+
+            // unload it
+            window.URL.revokeObjectURL(img.src);
+
+            // check its dimensions
+            if (width <= 500 && height <= 500 && file.size < 1000000) {
+                // it fits 
+            } else {
+                // it doesn't fit, unset the value 
+                uploadImage.value = "";
+                alert("Please check that your image is no larger than 500x500 AND no larger than 1MB!");
+            }
+        };
+    };
+</script>
