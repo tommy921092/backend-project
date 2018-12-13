@@ -18,12 +18,12 @@
             <div id="adjustment">
                 <div id="photoupload" class="row">
                     <div id="imgupload" class="col-md-6">
-                        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onchange='previewFile()'>
                     </div>
 
                     <div class="col-md-6">
                         <div id="imgshow">
-                            <p>test</p>
+                            <img id='output' height="200" alt="Image preview...">
                         </div>
                     </div>
                 </div>
@@ -89,10 +89,23 @@
 <script>
     var uploadPhoto = document.getElementById("avatar");
 
-    uploadPhoto.onchange = function() {
-    if(this.files[0].size > 2000000){
-       alert("Image is too big! Please upload file less than 2MB");
-       this.value = "";
+    uploadPhoto.onchange = function () {
+        if (this.files[0].size > 2000000) {
+            alert("Image is too big! Please upload file less than 2MB");
+            this.value = "";
+        };
     };
-};
+    function previewFile() {
+        var preview = document.querySelector('img');
+        var file = document.querySelector('input#avatar').files[0];
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            preview.src = reader.result;
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
 </script>

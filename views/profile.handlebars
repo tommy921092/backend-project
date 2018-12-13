@@ -73,7 +73,9 @@
                 </form>
             </div>
             <div id="searchbody">
-                <div id="itemContainer" style="background-color: white;">
+                <div class="holder">
+                </div>
+                <div id="itemContainer">
                     <ul id="clearfix" class="items">
                         {{#each data}}
                         <li style="display: inline-block;">
@@ -81,9 +83,24 @@
                                 <img src={{imageurl}} alt="image">
                                 <div class="context">
                                     <p class="title"><span>{{recipe_name}}</span></p>
+
+                                    {{#if username}}
                                     <p class="users">Created by: <span>{{username}}</span></p>
+                                    {{else}}
+                                    <p class="users">Created by: <span> --- </span></p>
+                                    {{/if}}
+
+                                    {{#if tags}}
                                     <p class="tags">Tags: <span>{{tags}}</span></p>
-                                    <p class="time">Cooking Time: <span>{{time_taken}}</span><span> mins</span></p>
+                                    {{else}}
+                                    <p class="tags">Tags: <span> --- </span></p>
+                                    {{/if}}
+
+                                    {{#if time_taken}}
+                                    <p class="time">Cooking Time: <span>{{time_taken}} mins</span></p>
+                                    {{else}}
+                                    <p class="time">Cooking Time: <span> --- </span></p>
+                                    {{/if}}
                                     <a class="learnmore" href="/search/recipe?id={{recipeID}}">Learn More</a>
                                 </div>
                         </li>
@@ -141,3 +158,14 @@
 
 
 </body>
+
+<script type="text/javascript">
+    $("div.holder").jPages({
+        containerID: "clearfix",
+        perPage: 4,
+        startPage: 1,
+        startRange: 5,
+        midRange: 5,
+        endRange: 5
+    });
+</script>

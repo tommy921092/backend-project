@@ -18,7 +18,7 @@ class RecipeRouter {
     //search by name
     router.get("/search", (req, res) => {
       if (req.query.name) {
-        this.recipeService.listByName(req.query.name).then((data) => {
+        this.recipeService.listByName(req.query.name).then(data => {
           res.render("recipeList", { data });
         });
       }
@@ -33,6 +33,12 @@ class RecipeRouter {
           res.render("recipeList", { data });
         });
       }
+    });
+    //list All
+    router.get("/listAllfromDB", (req, res) => {
+      this.recipeService.listAll().then(data => {
+        res.render("recipeList", { data });
+      });
     });
     //add recipe
     router.post("/addRecipe", (req, res) => {
