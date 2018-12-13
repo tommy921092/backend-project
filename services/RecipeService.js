@@ -94,6 +94,7 @@ class RecipeService {
       }
       let query = await this.knex("recipes")
         .select(
+          'recipes.id',
           "recipes.recipe_name",
           "recipes.imageurl",
           "users.username",

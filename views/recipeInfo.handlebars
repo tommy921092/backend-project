@@ -5,6 +5,7 @@
         <img src="{{data.basicInfo.imageurl}}">
     </div>
     <div id="blockone">
+        <input type="text" style="display: none" name="recipeId" value={{data.basicInfo.id}}>
         <h5>Recipe Name: {{data.basicInfo.recipe_name}}</h5>
         <h5>Made by: {{data.basicInfo.username}}</h5>
         <h5>Time taken: {{data.basicInfo.time_taken}}</h5>
@@ -43,7 +44,7 @@
                 <form action="/sth" method="POST">
                     <input type="submit" value="Share">
                 </form>
-                <form action="/saveRecipe" method="POST">
+                <form action="/saveRecipe" method="post">
                     <input type="submit" value="Favourite">
                 </form>
                 <form action="/recipe" method="POST">

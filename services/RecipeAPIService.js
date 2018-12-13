@@ -94,7 +94,7 @@ class RecipeAPIService {
                 instructions: result.body.instructions,
                 time_taken: result.body.readyInMinutes
               })
-              .returing("id");
+              .returning("id");
 
             for (let i = 0; i < result.body.extendedIngredients.length; i++) {
               let query3 = await this.knex("ingredients").where(
@@ -130,7 +130,7 @@ class RecipeAPIService {
                 .where("measure_name", result.body.extendedIngredients[i].unit)
                 .first();
               await this.knex("recipes_ingredients").insert({
-                recipe_id: query2.id,
+                recipe_id: query2[0],
                 ingredient_id: query5.id,
                 measure_id: query6.id,
                 amount: result.body.extendedIngredients[i].amount

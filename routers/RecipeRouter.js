@@ -73,7 +73,8 @@ class RecipeRouter {
 
     router.post("/saveRecipe", (req, res) => {
       //to be finished
-      // return this.recipeService.save(recipeID, req.user.username);
+      this.recipeService.save(req.body.id, req.user.username);
+      res.redirect('/');
     });
 
     router.post("/imakeit", (req, res) => {
