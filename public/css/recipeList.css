@@ -1,9 +1,10 @@
 .holder {
   margin: 15px 0;
   text-align: center;
+  font-family: "Gill Sans", sans-serif;
 }
 .holder a {
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
   margin: 0 5px;
   color: #333;
@@ -25,7 +26,7 @@ a.jp-current:hover {
 }
 .holder a.jp-disabled,
 a.jp-disabled:hover {
-  color: #bbb;
+  color: black;
 }
 .holder a.jp-current,
 a.jp-current:hover,
@@ -68,28 +69,44 @@ a.jp-disabled:hover {
 }
 
 #itemContainer .context{
-  background-color: #330026;
+  background-color: #ad33ff;
   height: 170px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   color:white;
   padding: 10px;
   box-shadow: 0px 2px 4px rgba(0,0,0,0.5);
+  overflow-y: scroll;
 }
 
 #itemContainer .learnmore{
-  border: 1px solid;
+  border: 1px dashed;
   color: white;
   padding:5px;
-  background-color: #86b300;
   font-size: 12px;
   font-family: cursive;
+  margin-top: 20px;
+  position: relative;
+  left: 110px;
+  margin-bottom: 10px;
 }
 
+#itemContainer .learnmore:hover{
+  color: greenyellow;
+}
+
+#setcoloronly{
+  background-color: #ff8080;
+}
+
+.matchresult{
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
 
 #itemContainer{
-  background-color: #ec451b;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-left: 40px;
   margin-right: 40px;
   padding: 20px 20px;
@@ -109,15 +126,24 @@ a.jp-disabled:hover {
 }
 
 #itemContainer .title{
-  font-family: "Gill Sans", sans-serif;
+  font-family: cursive;
+  font-size: 15px;
   text-align: center;
-  margin:0
+  margin:0;
+  margin-bottom: 10px;
 }
 
-#itemContainer .time{
-  font-size:15px;
-  margin:5px 0px;
+.users, .tags, .time{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-bottom:0;
+  padding: 3px 0px;
 }
+
+.users:hover, .tags:hover, .time:hover{
+  color:black;
+  background: white;
+}
+
 
 #clearfix:after {
   content: "";

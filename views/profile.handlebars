@@ -4,56 +4,58 @@
 <body style="background: white;">
     <div id="container">
         <div id="userinfo">
-            <div id="userbucket">
+            <div id="userbucket" class="userbucket">
                 <h4>Your Profile</h4>
-                <img src={{profileInfo.profilepic}}>
-                <div class="userinfo">
-                    <p>Username: {{profileInfo.name}}</p>
-                    <p>Email: {{profileInfo.email}}</p>
-                </div>
+                <div class="flexbox">
+                    <div id="userphoto">
+                        <img src={{profileInfo.profilepic}}>
+                    </div>
 
+                    <div id="setting">
+                        <div class="userinfo">
+                            <h5>Username: {{profileInfo.name}}</h5>
+                            <h5>Email: {{profileInfo.email}}</h5>
+                        </div>
+                        <!-- Modal for setting-->
+                        <div id="photoupload">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Setting</button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Setting</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/image-upload" enctype='multipart/form-data' method="post" id="photoupload">
+                                                <div>
+                                                    <input id="image" name="image" type="file" accept="image/png, image/jpeg">
+                                                    <input type="submit" value="Photo Submit">
+                                                </div>
 
-                <div id="setting">
-                    <!-- Modal for photo upload-->
-                    <div id="photoupload">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Setting
-                        </button>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Setting</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                            </form>
+
+                                            <form action="/profile" method="post">
+                                                <div class="setusername">
+                                                    <input id="username" name="username" type="text" placeholder="Change UserName">
+                                                    <input type="submit" value="Submit">
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="/image-upload" enctype='multipart/form-data' method="post" id="photoupload">
-                                            <div>
-                                                <input id="image" name="image" type="file" accept="image/png, image/jpeg">
-                                            </div>
-                                            <input type="submit" value="Photo Submit">
-                                        </form>
-
-                                        <form action="/profile" method="post">
-                                            <div>
-                                                <input id="username" name="username" type="text" placeholder="Change UserName">
-                                                <input type="submit" value="Submit">
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-
                                 </div>
                             </div>
+                            <a href='/'><button class="clicktwo">Home</button></a>
+                            <a href='/logout'><button class="clickone">Logout</button></a>
                         </div>
-                        <a href='/'><button class="clicktwo">Home</button></a>
-                        <a href='/logout'><button class="clickone">Logout</button></a>
                     </div>
                 </div>
             </div>
@@ -73,14 +75,16 @@
             <div id="searchbody">
                 <div id="itemContainer" style="background-color: white;">
                     <ul id="clearfix" class="items">
-                        {{#each obj}}
+                        {{#each data}}
                         <li style="display: inline-block;">
                             <div id="settingcard">
-                                <img src=https://spoonacular.com/recipeImages/{{image}} alt="image">
+                                <img src={{imageurl}} alt="image">
                                 <div class="context">
-                                    <p class="title"><span>{{title}}</span></p>
-                                    <p class="time">Cooking Time: <span>{{readyInMinutes}}</span><span> mins</span></p>
-                                    <a class="learnmore" href="/searchByAPI/recipe?id={{id}}">Learn More</a>
+                                    <p class="title"><span>{{recipe_name}}</span></p>
+                                    <p class="users">Created by: <span>{{username}}</span></p>
+                                    <p class="tags">Tags: <span>{{tags}}</span></p>
+                                    <p class="time">Cooking Time: <span>{{time_taken}}</span><span> mins</span></p>
+                                    <a class="learnmore" href="/search/recipe?id={{recipeID}}">Learn More</a>
                                 </div>
                         </li>
                         {{/each}}
@@ -95,16 +99,14 @@
             <h4>My Favourite</h4>
             <div id="itemContainer" style="background-color: white">
                 <ul id="clearfix" class="items">
-                    {{#each data}}
+                    {{#each obj}}
                     <li style="display: inline-block;">
                         <div id="settingcard">
-                            <img src={{imageurl}} alt="image">
+                            <img src=https://spoonacular.com/recipeImages/{{image}} alt="image">
                             <div class="context">
-                                <p class="title"><span>{{recipe_name}}</span></p>
-                                <p class="users">Created by: <span>{{username}}</span></p>
-                                <p class="tags">Tags: <span>{{tags}}</span></p>
-                                <p class="time">Cooking Time: <span>{{time_taken}}</span><span> mins</span></p>
-                                <a class="learnmore" href="/search/recipe?id={{recipeID}}">Learn More</a>
+                                <p class="title"><span>{{title}}</span></p>
+                                <p class="time">Cooking Time: <span>{{readyInMinutes}}</span><span> mins</span></p>
+                                <a class="learnmore" href="/searchByAPI/recipe?id={{id}}">Learn More</a>
                             </div>
                     </li>
                     {{/each}}
@@ -134,36 +136,8 @@
             </div>
         </div>
     </div>
+    </section>
+
+
+
 </body>
-
-<script>
-    // File validation
-    var uploadImage = document.getElementById("image");
-
-    uploadImage.onchange = function (e) { // when there is a change detected in this input field
-
-        e.preventDefault();
-
-        var file = this.files[0];
-        var img = new Image(); // create an image element with that selected file
-        img.src = window.URL.createObjectURL(file);
-
-        // as soon as the image has been loaded
-        img.onload = function () {
-            var width = img.naturalWidth,
-                height = img.naturalHeight;
-
-            // unload it
-            window.URL.revokeObjectURL(img.src);
-
-            // check its dimensions
-            if (width <= 500 && height <= 500 && file.size < 1000000) {
-                // it fits 
-            } else {
-                // it doesn't fit, unset the value 
-                uploadImage.value = "";
-                alert("Please check that your image is no larger than 500x500 AND no larger than 1MB!");
-            }
-        };
-    };
-</script>

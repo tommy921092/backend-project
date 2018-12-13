@@ -100,6 +100,10 @@ class UserRouter {
       res.render("uploadform");
     });
 
+    router.get('/upload', (req, res) => {
+      res.render('uploadform')
+    })
+
     return router;
   }
 }

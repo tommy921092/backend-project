@@ -24,7 +24,7 @@ class RecipeAPIService {
           });
       } else {
         const url =
-          "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?&number=4&query=" +
+          "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?&number=2&query=" +
           name;
         unirest
           .get(url)

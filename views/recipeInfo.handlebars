@@ -1,17 +1,21 @@
 <link rel="stylesheet" href="/css/recipe.css" />
 
+<body>
 <section id="recipe">
     <div id="imagine" class="need-flex-start">
         <img src="{{data.basicInfo.imageurl}}">
     </div>
     <div id="blockone">
-        {{!-- <input type="text" name="recipeId" value={{data.basicInfo.id}}> req.body.id not working for save recipe without form submission--}} 
-        <h5>Recipe Name: {{data.basicInfo.recipe_name}}</h5>
-        <h5>Made by: {{data.basicInfo.username}}</h5>
-        <h5>Time taken: {{data.basicInfo.time_taken}}</h5>
+        <h5>{{data.basicInfo.recipe_name}}</h5>
+        {{#if data.baseInfo.username}}
+        <h6>Made by: {{data.basicInfo.username}}</h6>
+        {{else}}
+        <h6>Made by: ---- </h6>
+        {{/if}}
+        <h6>Time taken: {{data.basicInfo.time_taken}} mins</h6>
         <div class="row">
-            <div id="rating" class="col-md-2 col-sm-12 com-12">
-                <div class="rating">
+            <div id="rating" class="col-md-12 col-sm-12 com-12">
+                <div class="star">
                     <span>☆</span>
                     <span>☆</span>
                     <span>☆</span>
@@ -84,3 +88,4 @@
         </div>
     </div>
 </section>
+</body>

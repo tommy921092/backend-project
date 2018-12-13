@@ -24,6 +24,7 @@ nav{
 #searchbar h4{
     margin: 20px;
     text-align: center;
+    color:white;
 }
 
 #searchbar form{
@@ -31,16 +32,64 @@ nav{
     text-align: center;
 }
 
+#searchbar input[type="submit"]{
+    margin-left: 10px;
+    border: 1px solid #803300;
+    background-color: #803300;
+    border-radius: 5px;
+    color:white;
+    cursor: pointer;
+}
+
+#searchbar input[type="submit"]:hover{
+    background-color: #ff6600;
+    border-color:#ff6600;
+}
+
 #searchbox{
     width: 50%;
 }
 
+#search-type{
+    color:white;
+    border: 1px solid white;
+    background:none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#DB-API{
+    color:white;
+    border: 1px solid white;
+    background:none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+
+@media only screen and (max-width:650px){
+    #searchtools{
+        display: block;
+        margin-top: 10px;
+    }
+
+    #searchbar input[type="submit"]{
+        margin-top: 10px;
+    }
+} 
+
+
 /* slideshows */
+
+#slideshow p{
+    margin-bottom:5px;
+}
+
 #slideshow img {
     border: 1px solid #ddd;
     border-radius: 4px;
+    background-color:white;
     padding: 5px;
-    width: 150px;
 }
 
 #slideshow{
@@ -57,10 +106,101 @@ nav{
     border-radius: 5px;
 }
 
-/* footer */
 
+#slideshow .carousel-caption{
+    padding-top:10px;
+    text-align: center;
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+@media only screen and (max-width:500px){
+    #slideshow .carousel-caption{
+        font-size: 20px;
+    }
+}
+
+#slideshow .learnmore{
+    border: 1px solid white;
+    background: none;
+    color:white;
+    font-family: "Gill Sans", sans-serif;
+    font-size: 15px; 
+}
+
+#slideshow input .learnmore:hover{
+    background-color:#00b36b;
+    color:white;
+}
+
+#slideshow .learnmore:link {
+    color:white;
+}
+
+#slideshow .learnmore:hover {
+    color:#00b36b;
+}
+  
+#slideshow .imgcontainer{
+    display: flex;
+    justify-content: center;
+    width:100%;
+    padding-bottom:20px;
+    opacity: 0.9;
+}
+
+#slideshow .img{
+    width:90%;
+}
+
+.carousel-caption{
+    left:25% !important;
+    right:25% !important;
+    padding-bottom:20px;
+}
+
+@media only screen and (min-width:1200px){
+    .carousel-caption{
+        left:35% !important;
+        right:35% !important;
+    }
+}
+
+@media only screen and (max-width:600px){
+    .carousel-caption{
+        left:20% !important;
+        right:20% !important;
+    }
+}
+
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    border: 1px solid;
+    padding: 15px;
+    border-radius: 50%;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    background-size: 60% 100%;
+}
+
+
+@media only screen and (min-width:1000px){
+    .carousel-control-prev{
+        left: 10%;
+    }
+    .carousel-control-next {
+        right: 10%;
+    }
+}
+
+
+
+/* footer */
 .footer-bs {
-    background-color: #3c3d41;
+    background-color: #737373;
 	padding: 40px 40px;
 	color: rgba(255,255,255,1.00);
 	/* margin-bottom: 20px; */
@@ -93,15 +233,3 @@ nav{
 	.footer-bs .footer-nav { border-left:solid 1px rgba(255,255,255,0.10); }
 }
 
-.darker{
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-#slideshow .carousel-caption{
-    padding-top:0;
-    font-size: 10px;
-}
-
-#slideshow h5{
-    font-size: 15px;
-}

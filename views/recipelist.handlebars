@@ -1,30 +1,51 @@
 <link rel="stylesheet" href="/css/recipeList.css">
 
-<body style="background-color:#00334d;">
+<body style="background-color:#00e6ac;">
     {{>searchbar}}
     <!-- navigation holder -->
     <div class="holder">
     </div>
 
     <!-- item container -->
-    <div id="itemContainer">
-        <p>{{data.length}} matching results for</p>
-        <ul id="clearfix" class="items">
-            {{#each data}}
-            <li style="display: inline-block;">
-                <div id="settingcard">
-                    <img src={{imageurl}} alt="image">
-                    <div class="context">
-                        <p class="title"><span>{{recipe_name}}</span></p>
-                        <p class="users">Created by: <span>{{username}}</span></p>
-                        <p class="tags">Tags: <span>{{tags}}</span></p>
-                        <p class="time">Cooking Time: <span>{{time_taken}} mins</span></p>
-                        <a class="learnmore" href="/search/recipe?id={{id}}">Learn More</a>
-                    </div>
-            </li>
-            {{/each}}
-        </ul>
+    <div id="setcoloronly">
+        <div id="itemContainer">
+            <ul id="clearfix" class="items">
+                {{#each data}}
+                <li style="display: inline-block;">
+                    <div id="settingcard">
+                        <img src={{imageurl}} alt="image">
+                        <div class="context">
+                            <p class="title"><span>{{recipe_name}}</span></p>
+                            
+                            {{#if username}}
+                            <p class="users">Created by: <span>{{username}}</span></p>
+                            {{else}}
+                            <p class="users">Created by: <span> --- </span></p>
+                            {{/if}}
+
+                            {{#if tags}}
+                            <p class="tags">Tags: <span>{{tags}}</span></p>
+                            {{else}}
+                            <p class="tags">Tags: <span> --- </span></p>
+                            {{/if}}
+
+                            {{#if time_taken}}
+                            <p class="time">Cooking Time: <span>{{time_taken}} mins</span></p>
+                            {{else}}
+                            <p class="time">Cooking Time: <span> --- </span></p>
+                            {{/if}}
+                            <a class="learnmore" href="/search/recipe?id={{id}}">Learn More</a>
+                        </div>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <div class="matchresult">
+            <p>{{data.length}} matching results {{req.body}}</p>
+        </div>
     </div>
+
 </body>
 
 <script type="text/javascript">
