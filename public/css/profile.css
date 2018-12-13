@@ -1,9 +1,10 @@
-#container h4{
+.userbucket h4{
     text-align: center;
     color:black;
     width:100%;
-    font-weight:bold;
-    
+    font-size: 25px;
+    font-family: "Gill Sans", sans-serif;
+    margin-top: 20px;
 }  
 
 #userbucket img{
@@ -14,8 +15,15 @@
     margin-top: 10px;
 }
 
+p, h5, a, #record h4, h6{
+    font-family: "Gill Sans", sans-serif;
+}
 
-@media only screen and (max-width:350px){
+.userinfo{
+    margin-bottom: 30px;
+}
+
+@media only screen and (max-width:480px){
     #userbucket img{
     width:100px;
     height:100px;
@@ -30,12 +38,31 @@
 }
 
 
-#userbucket{
+.userbucket{
     border-radius: 20px;
     width:60%;
     text-align: center;
-    background-color: orangered;
+    background-color: #ffcc66;
 }
+
+@media only screen and (max-width:600px){
+    .userbucket{
+    width:100%;
+    background-color:#ffcc66;
+    }
+}
+
+#photoupload input[name="image"]{
+    border: 1px solid;
+    background-color: black;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-weight:bold;
+    width:45%;
+    font-size:15px;
+    color:white
+}
+
 
 #photoupload input[value="Photo Submit"]{
     border: 1px solid;
@@ -49,6 +76,61 @@
 #photoupload input[value="Photo Submit"]:hover{
     background-color: orange;
     transition: 0.5s;
+}
+
+.setusername input[type="text"]{
+    border: 2px solid #33cc33;
+    border-radius: 5px;
+}
+
+.setusername input[type="submit"]{
+    border: 1px solid #33cc33;
+    background-color: #1f7a1f;
+    color: white;
+    font-weight:bold;
+    border-radius: 5px;
+}
+
+.setusername input[type="submit"]:hover{
+    background-color: #33cc33;
+    transition: 0.5s;
+}
+
+.flexbox{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#userphoto{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#setting{
+    width:50%;
+}
+
+@media only screen and (max-width:1000px){
+    #userphoto{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    #setting{
+        width:100%;
+    }
+
+    .flexbox{
+        display:block;
+    }
+
+}
+
+#photoupload button{
+    margin-bottom: 15px;
 }
 
 #namechange input[value="Submit"]{
@@ -106,10 +188,14 @@
     background-color:#55ff00;
 }
 
-.row{
-    width:100%;
-    text-align: center;
+
+
+/* this is the origin profile css, might modify later */
+
+#record{
+    padding:10px;
 }
+
 
 .need-flex-start{
     display: flex;
@@ -122,35 +208,11 @@
     align-content: center;
 }
 
-#blockone{
-    text-align: center;
-}
-
-#blocktwo{
-    text-align: center;
-}
-
-#blockthree{
-    text-align: center;
-}
-
-#information input[type="submit"]{
-    display: block;
-    margin-bottom: 20px;
-    background: none;
-    border:0;
-}
-
-#information input[type="submit"]:hover{
-    color:#3399ff;
-    transition: 0.8s;
-}
 
 #horizonline{
     text-align: center;
     width: 100%;
     height: 1px;
-    margin-bottom: 20px;
     background-color:#d9d9d9;
 }
 
@@ -162,15 +224,19 @@
 #upload input[type="submit"]{
     border: 1px solid;
     background: none;
-    border-radius: 20px;
+    border-radius: 5px;
     margin-left: 30px;
-    font-size: 10px;
+    font-size: 15px;
+    padding:5px;
+    background-color:black;
+    color: white;
 }
 
 #upload input[type="submit"]:hover{
-    background-color:black;
+    background-color:#808080;
     color:white;
     transition: 0.8s;
+    cursor: pointer;
 }
 
 #favourite{

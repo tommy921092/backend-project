@@ -1,59 +1,61 @@
-<link rel="stylesheet" href="/css/profile.css"/>
+<link rel="stylesheet" href="/css/profile.css" />
 <link rel="stylesheet" href="/css/recipeList.css" />
 
 <body style="background: white;">
     <div id="container">
         <div id="userinfo">
-            <div id="userbucket">
+            <div id="userbucket" class="userbucket">
                 <h4>Your Profile</h4>
-                <img src={{profilepic}}>
-                <div class="userinfo">
-                    <p>Username: {{name}}</p>
-                    <p>Email: {{email}}</p>
-                </div>
+                <div class="flexbox">
+                    <div id="userphoto">
+                        <img src={{profilepic}}>
+                    </div>
 
+                    <div id="setting">
+                        <div class="userinfo">
+                            <h5>Username: {{name}}</h5>
+                            <h5>Email: {{email}}</h5>
+                        </div>
+                        <!-- Modal for setting-->
+                        <div id="photoupload">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Setting</button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Setting</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/image-upload" enctype='multipart/form-data' method="post" id="photoupload">
+                                                <div>
+                                                    <input id="image" name="image" type="file" accept="image/png, image/jpeg">
+                                                <input type="submit" value="Photo Submit">
+                                                </div>
+                            
+                                            </form>
 
-                <div id="setting">
-                    <!-- Modal for photo upload-->
-                    <div id="photoupload">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Setting
-                        </button>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Setting</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                            <form action="/profile" method="post">
+                                                <div class="setusername">
+                                                    <input id="username" name="username" type="text" placeholder="Change UserName">
+                                                    <input type="submit" value="Submit">
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="/image-upload" enctype='multipart/form-data' method="post" id="photoupload">
-                                            <div>
-                                                <input id="image" name="image" type="file" accept="image/png, image/jpeg">
-                                            </div>
-                                            <input type="submit" value="Photo Submit">
-                                        </form>
-
-                                        <form action="/profile" method="post">
-                                            <div>
-                                                <input id="username" name="username" type="text" placeholder="Change UserName">
-                                                <input type="submit" value="Submit">
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-
                                 </div>
                             </div>
+                            <a href='/'><button class="clicktwo">Home</button></a>
+                            <a href='/logout'><button class="clickone">Logout</button></a>
                         </div>
-                        <a href='/'><button class="clicktwo">Home</button></a>
-                        <a href='/logout'><button class="clickone">Logout</button></a>
                     </div>
                 </div>
             </div>
