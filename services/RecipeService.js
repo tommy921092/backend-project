@@ -4,20 +4,37 @@ class RecipeService {
   }
   async listByName(keyword) {
     try {
-      let query = await this.knex("recipes")
-        .select(
-          "recipes.id",
-          "recipes.recipe_name",
-          "recipes.imageurl",
-          "users.username",
-          "recipes.time_taken",
-          this.knex.raw("ARRAY_AGG(tags.tagname) as tags")
-        )
-        .fullOuterJoin("users", "recipes.user_id", "users.id")
-        .fullOuterJoin("recipes_tags", "recipes.id", "recipes_tags.recipe_id")
-        .fullOuterJoin("tags", "recipes_tags.tag_id", "tags.id")
-        .whereRaw(`LOWER(recipes.recipe_name) LIKE ?`, [`%${keyword}%`]) //for case-insensitive
-        .groupBy("recipes.id", "users.username");
+      let query;
+      if (keyword !=='') {
+        query = await this.knex("recipes")
+          .select(
+            "recipes.id",
+            "recipes.recipe_name",
+            "recipes.imageurl",
+            "users.username",
+            "recipes.time_taken",
+            this.knex.raw("ARRAY_AGG(tags.tagname) as tags")
+          )
+          .fullOuterJoin("users", "recipes.user_id", "users.id")
+          .fullOuterJoin("recipes_tags", "recipes.id", "recipes_tags.recipe_id")
+          .fullOuterJoin("tags", "recipes_tags.tag_id", "tags.id")
+          .whereRaw(`LOWER(recipes.recipe_name) LIKE ?`, [`%${keyword}%`]) //for case-insensitive
+          .groupBy("recipes.id", "users.username");
+      } else {
+        query = await this.knex("recipes") //return all recipes
+          .select(
+            "recipes.id",
+            "recipes.recipe_name",
+            "recipes.imageurl",
+            "users.username",
+            "recipes.time_taken",
+            this.knex.raw("ARRAY_AGG(tags.tagname) as tags")
+          )
+          .fullOuterJoin("users", "recipes.user_id", "users.id")
+          .fullOuterJoin("recipes_tags", "recipes.id", "recipes_tags.recipe_id")
+          .fullOuterJoin("tags", "recipes_tags.tag_id", "tags.id")
+          .groupBy("recipes.id", "users.username");
+      }
       return query;
     } catch (e) {
       console.log(e);
