@@ -39,7 +39,7 @@ class RecipeService {
         .fullOuterJoin("recipes_tags", "recipes.id", "recipes_tags.recipe_id")
         .fullOuterJoin("tags", "recipes_tags.tag_id", "tags.id")
         .groupBy("recipes.id", "users.username");
-        return query;
+      return query;
     } catch (e) {
       console.log(e);
     }
@@ -207,7 +207,6 @@ class RecipeService {
     try {
       console.log(content);
       let amountArr = [];
-      let measureArr = [];
       for (let i in content.amount) {
         amountArr[i] = Number(content.amount[i]);
         console.log(amountArr[i]);
@@ -272,6 +271,9 @@ class RecipeService {
           measure_id: query6.id,
           amount: amountArr[i]
         });
+      }
+      if (typeof content.tag == "string") {
+        content.tag = [content.tag];
       }
       for (let i in content.tag) {
         let query7 = await this.knex("tags").where({
