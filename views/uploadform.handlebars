@@ -1,33 +1,39 @@
 <link rel="stylesheet" href="/css/upload.css" />
 
+<template id="fuckingtemplate">
+    <div id="inline-block">
+        <div class="quantity">
+            <textarea name="ingredient[]"></textarea>
+            <input type="number" name="amount[]" placeholder="e.g x1">
+            <input type="text" name="measure[]" placeholder="e.g pcs">
+        </div>
+        <div class="quantity">
+            <textarea name="ingredient[]"></textarea>
+            <input type="number" name="amount[]" placeholder="e.g x1">
+            <input type="text" name="measure[]" placeholder="e.g pcs">
+        </div>
+    </div>
+</template>
+
 <section id="uploadform">
     <div id="background">
-        {{!-- <form action="/profile" method="post">
-            <div>
-                <label>Username:</label>
-                <input id="username" name="username" type="text" placeholder="Choose wisely">
-            </div>
-            <input type="submit" value="Submit">
-        </form> --}}
         <form action="/addRecipe" method="POST" enctype="multipart/form-data">
-
             <div id="title">
                 <input type="text" name="title" placeholder="e.g Apple Pie">
             </div>
-
             <div id="adjustment">
                 <div id="photoupload" class="row">
-                    <div id="imgupload" class="col-md-6">
+                    <div id="imgupload">
                         <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onchange='previewFile()'>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div id="imgshow">
-                            <img id='output' height="200" alt="Image preview...">
-                        </div>
                     </div>
                 </div>
             </div>
+
+            {{!-- <div class="middle">
+                <div id="imgshow">
+                    <h5>Photo</h5>
+                </div>
+            </div> --}}
 
             <div id="ingredient-element">
                 <p>Ingredient:</p>
@@ -42,10 +48,12 @@
                         <input type="number" name="amount[]" placeholder="e.g x1">
                         <input type="text" name="measure[]" placeholder="e.g pcs">
                     </div>
-                    <button id="btn"><i class="fas fa-plus-circle"></i></button>
                 </div>
-            </div>
 
+                <div id="content-container"></div>
+
+                <button type="button"><i class="fa fa-plus-circle" id="adding-ing"> Add Ingredient</i></button>
+            </div>
             <div id="instructions">
                 <p>Instructions:</p>
                 <textarea name="instructions" placeholder="1. Pouring the water into the glass"></textarea>
@@ -58,31 +66,57 @@
                     <span>mins</span>
                 </div>
             </div>
-
             <div id="tag-element">
                 <p>Tag:</p>
-                <input type="checkbox" name="tag" value="dessert">
-                <label for="dessert">Dessert</label>
-                <input type="checkbox" name="tag" value="lunch">
-                <label for="lunch">Lunch</label>
-                <input type="checkbox" name="tag" value="bread">
-                <label for="bread">Bread</label>
-                <input type="checkbox" name="tag" value="soup">
-                <label for="soup">Soup</label>
-                <input type="checkbox" name="tag" value="morning meal">
-                <label for="morning meal">Morning meal</label>
-                <input type="checkbox" name="tag" value="sause">
-                <label for="sause">Sause</label>
-                <input type="checkbox" name="tag" value="fingerood">
-                <label for="fingerood">Fingerood</label>
-                <input type="checkbox" name="tag" value="beverage">
-                <label for="beverage">Beverage</label>
-                <input type="checkbox" name="tag" value="side dish">
-                <label for="side dish">Side dish</label>
-            </div>
 
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="dessert">
+                    <label for="dessert">Dessert</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="lunch">
+                    <label for="lunch">Lunch</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="bread">
+                    <label for="bread">Bread</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="soup">
+                    <label for="soup">Soup</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="morning meal">
+                    <label for="morning meal">Morning meal</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="sause">
+                    <label for="sause">Sause</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="fingerood">
+                    <label for="fingerood">Fingerood</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="beverage">
+                    <label for="beverage">Beverage</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="side dish">
+                    <label for="side dish">Side dish</label>
+                </div>
+            </div>
             <input type="submit" value="Submit">
-        </form>
+    </div>
+    </form>
     </div>
 </section>
 
@@ -108,4 +142,13 @@
             reader.readAsDataURL(file);
         }
     }
+
+    $(document).ready(function () {
+        $('#adding-ing').on("click", function () {
+            let userTemplate = $('#fuckingtemplate').clone();
+
+            let contentContainer = $("#content-container");
+            contentContainer.append(userTemplate.html());
+        });
+    });
 </script>

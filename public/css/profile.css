@@ -222,18 +222,24 @@ p, h5, a, #record h4, h6{
     height: auto;
 }
 
-#upload input[type="submit"]{
+.uploadpage{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.uploadpage a{
     border: 1px solid;
     background: none;
     border-radius: 5px;
     margin-left: 30px;
-    font-size: 15px;
+    font-size: 13px;
     padding:5px;
     background-color:black;
     color: white;
+    height: 32px;
 }
 
-#upload input[type="submit"]:hover{
+.uploadpage a{
     background-color:#808080;
     color:white;
     transition: 0.8s;

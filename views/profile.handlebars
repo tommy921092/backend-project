@@ -66,15 +66,13 @@
 
     <div id="record">
         <div id="upload">
-            <div class="need-flex-start">
+            <div class="uploadpage">
                 <h4>My Upload</h4>
-                <form action="/sth" method="POST">
-                    <input type="submit" value="+ Upload New Recipe ">
-                </form>
+                <a href="/upload">UPLOAD RECIPE</a>
             </div>
+            
+            <div class="holder"></div>
             <div id="searchbody">
-                <div class="holder">
-                </div>
                 <div id="itemContainer">
                     <ul id="clearfix" class="items">
                         {{#each data}}
@@ -106,6 +104,7 @@
                         </li>
                         {{/each}}
                     </ul>
+                    
                 </div>
             </div>
         </div>
