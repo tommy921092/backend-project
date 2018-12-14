@@ -17,131 +17,106 @@
 
 <section id="uploadform">
     <div id="background">
-        <form action="/" method="POST" enctype="multipart/form-data">
+        <form action="/addRecipe" method="POST" enctype="multipart/form-data">
             <div id="title">
                 <input type="text" name="title" placeholder="e.g Apple Pie">
             </div>
             <div id="adjustment">
                 <div id="photoupload" class="row">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Upload
-                        Photo</button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Upload Photo</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    {{!-- something need to add --}}
-                                    <form action="/sth" enctype='multipart/form-data' method="post" id="recipephoto"></form>
-                                    <div>
-                                        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onchange='previewFile()'>
-                                        <input type="submit" value="Photo Submit">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="middle">
-
-                    </div>
-
-                </div>
-                <div class="middle">
-                    <div id="imgshow">
-                        <h5>Photo</h5>
+                    <div id="imgupload">
+                        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onchange='previewFile()'>
                     </div>
                 </div>
-
-                <div id="ingredient-element">
-                    <p>Ingredient:</p>
-                    <div id="inline-block">
-                        <div class="quantity">
-                            <textarea name="ingredient[]"></textarea>
-                            <input type="number" name="amount[]" placeholder="e.g x1">
-                            <input type="text" name="measure[]" placeholder="e.g pcs">
-                        </div>
-                        <div class="quantity">
-                            <textarea name="ingredient[]"></textarea>
-                            <input type="number" name="amount[]" placeholder="e.g x1">
-                            <input type="text" name="measure[]" placeholder="e.g pcs">
-                        </div>
-                    </div>
-                    
-                    <div id="content-container"></div>
-
-                    <button type="button"><i class="fa fa-plus-circle" id="adding-ing"> Add Ingredient</i></button>
-                </div>
-                <div id="instructions">
-                    <p>Instructions:</p>
-                    <textarea name="instructions" placeholder="1. Pouring the water into the glass"></textarea>
-                </div>
-
-                <div id="time">
-                    <p>Total Cooking Time:</p>
-                    <div id="verticalcenter">
-                        <textarea name="time_taken" placeholder="120"></textarea>
-                        <span>mins</span>
-                    </div>
-                </div>
-                <div id="tag-element">
-                    <p>Tag:</p>
-
-                    <div class="grouping">
-                        <input type="checkbox" name="tag" value="dessert">
-                        <label for="dessert">Dessert</label>
-                    </div>
-
-                    <div class="grouping">
-                        <input type="checkbox" name="tag" value="lunch">
-                        <label for="lunch">Lunch</label>
-                    </div>
-
-                    <div class="grouping">
-                        <input type="checkbox" name="tag" value="bread">
-                        <label for="bread">Bread</label>
-                    </div>
-
-                    <div class="grouping">
-                        <input type="checkbox" name="tag" value="soup">
-                        <label for="soup">Soup</label>
-                    </div>
-
-                    <div class="grouping">
-                        <input type="checkbox" name="tag" value="morning meal">
-                        <label for="morning meal">Morning meal</label>
-                    </div>
-
-                    <div class="grouping">
-                        <input type="checkbox" name="tag" value="sause">
-                        <label for="sause">Sause</label>
-                    </div>
-
-                    <div class="grouping">
-                        <input type="checkbox" name="tag" value="fingerood">
-                        <label for="fingerood">Fingerood</label>
-                    </div>
-
-                    <div class="grouping">
-                        <input type="checkbox" name="tag" value="beverage">
-                        <label for="beverage">Beverage</label>
-                    </div>
-
-                    <div class="grouping">
-                        <input type="checkbox" name="tag" value="side dish">
-                        <label for="side dish">Side dish</label>
-                    </div>
-                </div>
-                <input type="submit" value="Submit">
             </div>
-        </form>
+
+            {{!-- <div class="middle">
+                <div id="imgshow">
+                    <h5>Photo</h5>
+                </div>
+            </div> --}}
+
+            <div id="ingredient-element">
+                <p>Ingredient:</p>
+                <div id="inline-block">
+                    <div class="quantity">
+                        <textarea name="ingredient[]"></textarea>
+                        <input type="number" name="amount[]" placeholder="e.g x1">
+                        <input type="text" name="measure[]" placeholder="e.g pcs">
+                    </div>
+                    <div class="quantity">
+                        <textarea name="ingredient[]"></textarea>
+                        <input type="number" name="amount[]" placeholder="e.g x1">
+                        <input type="text" name="measure[]" placeholder="e.g pcs">
+                    </div>
+                </div>
+
+                <div id="content-container"></div>
+
+                <button type="button"><i class="fa fa-plus-circle" id="adding-ing"> Add Ingredient</i></button>
+            </div>
+            <div id="instructions">
+                <p>Instructions:</p>
+                <textarea name="instructions" placeholder="1. Pouring the water into the glass"></textarea>
+            </div>
+
+            <div id="time">
+                <p>Total Cooking Time:</p>
+                <div id="verticalcenter">
+                    <textarea name="time_taken" placeholder="120"></textarea>
+                    <span>mins</span>
+                </div>
+            </div>
+            <div id="tag-element">
+                <p>Tag:</p>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="dessert">
+                    <label for="dessert">Dessert</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="lunch">
+                    <label for="lunch">Lunch</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="bread">
+                    <label for="bread">Bread</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="soup">
+                    <label for="soup">Soup</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="morning meal">
+                    <label for="morning meal">Morning meal</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="sause">
+                    <label for="sause">Sause</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="fingerood">
+                    <label for="fingerood">Fingerood</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="beverage">
+                    <label for="beverage">Beverage</label>
+                </div>
+
+                <div class="grouping">
+                    <input type="checkbox" name="tag" value="side dish">
+                    <label for="side dish">Side dish</label>
+                </div>
+            </div>
+            <input type="submit" value="Submit">
+    </div>
+    </form>
     </div>
 </section>
 
@@ -168,8 +143,8 @@
         }
     }
 
-     $(document).ready(function(){
-        $('#adding-ing').on("click",function(){
+    $(document).ready(function () {
+        $('#adding-ing').on("click", function () {
             let userTemplate = $('#fuckingtemplate').clone();
 
             let contentContainer = $("#content-container");
