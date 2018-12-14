@@ -73,6 +73,10 @@ class UserRouter {
       })
     })
 
+    router.get("/upload", isLoggedIn, (req, res) => {
+      res.render("uploadform");
+    });
+
     return router;
   }
 }
